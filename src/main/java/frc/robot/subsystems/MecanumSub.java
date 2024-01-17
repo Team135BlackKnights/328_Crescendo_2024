@@ -6,19 +6,22 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 public class DriveSubsystem extends SubsystemBase {
-  /** Creates a new ExampleSubsystem. */
+  public CANSparkMax frontLeft = new CANSparkMax(Constant.FRONT_LEFT_MOTOR, MotorType.kBrushless);
+  public CANSparkMax frontRight = new CANSparkMax(Constant.FRONT_RIGHT_MOTOR, MotorType.kBrushless);
+  public CANSparkMax backRight = new CANSparkMax(Constant.BACK_RIGHT_MOTOR, MotorType.kBrushless);
+  public CANSparkMax backLeft = new CANSparkMax(Constant.BACK_LEFT_MOTOR, MotorType.kBrushless);
+
+  public MecanumDrive drive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
+  
+
+
+
   public DriveSubsystem() {
-
     
-
-
   }
-
-
-
-
 
 
 
@@ -36,12 +39,6 @@ public class DriveSubsystem extends SubsystemBase {
         });
   }
 
-  public CANSparkMax frontLeft = new CANSparkMax(Constant.FRONT_LEFT_MOTOR, MotorType.kBrushless);
-  public CANSparkMax frontRight = new CANSparkMax(Constant.FRONT_RIGHT_MOTOR, MotorType.kBrushless);
-  public CANSparkMax backRight = new CANSparkMax(Constant.BACK_RIGHT_MOTOR, MotorType.kBrushless);
-  public CANSparkMax backLeft = new CANSparkMax(Constant.BACK_LEFT_MOTOR, MotorType.kBrushless);
-
-  public MotorControlGroup leftDrive = new MotorControllerGroup(frontLeft, frontRight);
 
 
   /**

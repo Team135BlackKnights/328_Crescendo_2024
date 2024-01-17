@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.MecanumSub;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -12,11 +13,8 @@ public class DriveCommand extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final MecanumSub m_subsystem;
 
-  /**
-   * Creat a new ExampleCommand.
-   *
-   * @param subsystem The subsystem used by this command.
-   */
+
+
   public DriveCommand(MecanumSub subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies
@@ -29,7 +27,9 @@ public class DriveCommand extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    m_subsystem.drive.driveCartesian(RobotContainer.m_driverController.getLeftX(), RobotContainer.m_driverController.getLeftY(), RobotContainer.m_driverController.getRightX());
+  }
 
   // Called once the command ends or is interrupted.
   @Override
