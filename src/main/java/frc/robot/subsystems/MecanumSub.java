@@ -9,7 +9,18 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  public DriveSubsystem() {}
+  public DriveSubsystem() {
+
+    
+
+
+  }
+
+
+
+
+
+
 
   /**
    * Example command factory method.
@@ -24,6 +35,14 @@ public class DriveSubsystem extends SubsystemBase {
           /* one-time action goes here */
         });
   }
+
+  public CANSparkMax frontLeft = new CANSparkMax(Constant.FRONT_LEFT_MOTOR, MotorType.kBrushless);
+  public CANSparkMax frontRight = new CANSparkMax(Constant.FRONT_RIGHT_MOTOR, MotorType.kBrushless);
+  public CANSparkMax backRight = new CANSparkMax(Constant.BACK_RIGHT_MOTOR, MotorType.kBrushless);
+  public CANSparkMax backLeft = new CANSparkMax(Constant.BACK_LEFT_MOTOR, MotorType.kBrushless);
+
+  public MotorControlGroup leftDrive = new MotorControllerGroup(frontLeft, frontRight);
+
 
   /**
    * An example method querying a boolean state of the subsystem (for example, a digital sensor).
