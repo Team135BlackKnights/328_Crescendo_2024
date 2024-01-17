@@ -19,7 +19,7 @@ public class DriveCommand extends Command {
    */
   public DriveCommand(MecanumSub subsystem) {
     m_subsystem = subsystem;
-    // Use addRequirements() here to declare subsystem dependencies.
+    // Use addRequirements() here to declare subsystem dependencies
     addRequirements(subsystem);
   }
 
