@@ -20,7 +20,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
   public CANSparkMax backLeft = new CANSparkMax(Constants.BACK_LEFT_MOTOR, MotorType.kBrushless); */
 
   public class MecanumSub extends SubsystemBase {
-  public TalonSRX frontLeft = new TalonSRX(Constants.FRONT_LEFT_MOTOR, MotorType.kBrushless);
+  public TalonSRX frontLeft = new TalonFX(Constants.FRONT_LEFT_MOTOR, MotorType.kBrushless);
   public TalonSRX frontRight = new TalonSRX(Constants.FRONT_RIGHT_MOTOR, MotorType.kBrushless);
   public TalonSRX backRight = new TalonSRX(Constants.BACK_RIGHT_MOTOR, MotorType.kBrushless);
   public TalonSRX backLeft = new TalonSRX(Constants.BACK_LEFT_MOTOR, MotorType.kBrushless); 
