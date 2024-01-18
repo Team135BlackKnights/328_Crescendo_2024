@@ -1,8 +1,9 @@
-package main.java.frc.robot.subsystems;
+package frc.robot.subsystems;
 
-import com.revrobots.CANSparkMax;
-import com.revrobtoics.RelativeEncoder;
-import com.revrobotics.CANParkMaxLowLever.MotorType;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkBase.IdleMode;
+import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -12,14 +13,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase; //we are a commandbase, using
 import edu.wpi.first.wpilibj2.command.SubsystemBase; //duh
 import frc.robot.Constants;
 
-public class intakeS extends SubsystemBase { //create a subsystem
+public class LiftIntakeS extends SubsystemBase { //create a subsystem
 
-    public CANSparkMax liftIntakeMotor = new CANSparkMax(Constants.IntakeConstants.Lift_ID,MotorType.kBrushless);
+    public CANSparkMax liftIntakeMotor = new CANSparkMax(Constants.Lift_ID,MotorType.kBrushless);
     public RelativeEncoder liftIntakeEncoder = liftIntakeMotor.getEncoder();
-    public CANSparkMax liftIntakeMotor2 = new CANSparkMax(Constants.IntakeConstants.Lift_ID,MotorType.kBrushless);
+    public CANSparkMax liftIntakeMotor2 = new CANSparkMax(Constants.Lift_ID2,MotorType.kBrushless);
     public RelativeEncoder liftIntakeEncoder2 = liftIntakeMotor.getEncoder();
 
-    public liftIntakeS(){
+    public LiftIntakeS(){
       liftIntakeMotor.enableVoltageCompensation(12);
       liftIntakeMotor.setIdleMode(IdleMode.kBrake);
       liftIntakeMotor2.enableVoltageCompensation(12);
@@ -27,7 +28,8 @@ public class intakeS extends SubsystemBase { //create a subsystem
     }
 
     public void spinLiftIntake(double speed) {
-      spinLiftIntake.set(speed);
+      liftIntakeMotor.set(speed);
+       liftIntakeMotor2.set(speed);
     }
 
 

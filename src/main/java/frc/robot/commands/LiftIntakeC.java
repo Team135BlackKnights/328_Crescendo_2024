@@ -1,16 +1,16 @@
-package main.java.frc.robot.commands;
+package frc.robot.commands;
 
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.liftIntakeS;
+import frc.robot.subsystems.LiftIntakeS;
 
 /** An example command that uses an example subsystem. */
 
-public class intakeC extends CommandBase {
-    private final liftIntakeS liftIntakeS;
+public class LiftIntakeC extends Command {
+    private final LiftIntakeS liftIntakeS;
     
-    public intakeC(liftIntakeS subsystem) {
+    public LiftIntakeC(LiftIntakeS subsystem) {
         liftIntakeS = subsystem;
         addRequirements(subsystem);
     }

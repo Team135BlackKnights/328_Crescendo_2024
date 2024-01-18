@@ -6,20 +6,23 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel.MotorType;
 
-public class DriveSubsystem extends SubsystemBase {
-  public CANSparkMax frontLeft = new CANSparkMax(Constant.FRONT_LEFT_MOTOR, MotorType.kBrushless);
-  public CANSparkMax frontRight = new CANSparkMax(Constant.FRONT_RIGHT_MOTOR, MotorType.kBrushless);
-  public CANSparkMax backRight = new CANSparkMax(Constant.BACK_RIGHT_MOTOR, MotorType.kBrushless);
-  public CANSparkMax backLeft = new CANSparkMax(Constant.BACK_LEFT_MOTOR, MotorType.kBrushless);
+public class MecanumSub extends SubsystemBase {
+  public CANSparkMax frontLeft = new CANSparkMax(Constants.FRONT_LEFT_MOTOR, MotorType.kBrushless);
+  public CANSparkMax frontRight = new CANSparkMax(Constants.FRONT_RIGHT_MOTOR, MotorType.kBrushless);
+  public CANSparkMax backRight = new CANSparkMax(Constants.BACK_RIGHT_MOTOR, MotorType.kBrushless);
+  public CANSparkMax backLeft = new CANSparkMax(Constants.BACK_LEFT_MOTOR, MotorType.kBrushless);
 
   public MecanumDrive drive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
   
 
 
 
-  public DriveSubsystem() {
+  public MecanumSub() {
     
   }
 
@@ -61,8 +64,3 @@ public class DriveSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 }
-
-
-
-
-
