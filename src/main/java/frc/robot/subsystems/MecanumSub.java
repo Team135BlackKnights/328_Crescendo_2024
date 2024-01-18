@@ -4,11 +4,12 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+
+import com.ctre.phoenix6.hardware.TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
@@ -20,10 +21,10 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
   public CANSparkMax backLeft = new CANSparkMax(Constants.BACK_LEFT_MOTOR, MotorType.kBrushless); */
 
   public class MecanumSub extends SubsystemBase {
-  public TalonSRX frontLeft = new TalonFX(Constants.FRONT_LEFT_MOTOR, MotorType.kBrushless);
-  public TalonSRX frontRight = new TalonSRX(Constants.FRONT_RIGHT_MOTOR, MotorType.kBrushless);
-  public TalonSRX backRight = new TalonSRX(Constants.BACK_RIGHT_MOTOR, MotorType.kBrushless);
-  public TalonSRX backLeft = new TalonSRX(Constants.BACK_LEFT_MOTOR, MotorType.kBrushless); 
+  public TalonFX frontLeft = new TalonFX(Constants.FRONT_LEFT_MOTOR);
+  public TalonFX frontRight = new TalonFX(Constants.FRONT_RIGHT_MOTOR);
+  public TalonFX backRight = new TalonFX(Constants.BACK_RIGHT_MOTOR);
+  public TalonFX backLeft = new TalonFX(Constants.BACK_LEFT_MOTOR); 
 
   public MecanumDrive drive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
   
