@@ -9,7 +9,15 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.MecanumSub;
 import edu.wpi.first.wpilibj2.command.Command;
+<<<<<<< Updated upstream
 import edu.wpi.first.wpilibj2.command.XboxController;
+=======
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+import edu.wpi.first.wpilibj.XboxController;
+
+
+>>>>>>> Stashed changes
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -25,7 +33,12 @@ public class RobotContainer {
   private final MecanumSub m_exampleSubsystem = new MecanumSub();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
+<<<<<<< Updated upstream
 
+=======
+  public static XboxController m_driverController =
+      new XboxController(OperatorConstants.kDriverControllerPort);
+>>>>>>> Stashed changes
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
