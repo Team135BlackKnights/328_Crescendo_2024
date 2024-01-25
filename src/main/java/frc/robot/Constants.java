@@ -3,6 +3,10 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
+import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.Encoder;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -19,13 +23,17 @@ public final class Constants {
     public static final int BACK_LEFT_MOTOR = 13;
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
-
-
-    
-
   }
 
+
+// lift and intake motors
   public static final int Lift_ID = 20;
   public static final int Lift_ID2 = 21;
   public static int intakeMotorID = 30;
+
+  // encoders 
+  public static Encoder FRONT_LEFT_DRIVE_ENCODER;
+  public static Encoder FRONT_RIGHT_DRIVE_ENCODER;
+  public static Encoder BACK_LEFT_DRIVE_ENCODER;
+  public static Encoder BACK_RIGHT_DRIVE_ENCODER;
 }

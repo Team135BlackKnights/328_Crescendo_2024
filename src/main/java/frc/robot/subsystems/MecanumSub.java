@@ -7,6 +7,9 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -29,6 +32,15 @@ import com.ctre.phoenix6.hardware.TalonFX;
   public TalonFX backLeft = new TalonFX(Constants.BACK_LEFT_MOTOR); 
 
   public MecanumDrive drive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
+
+  Translation2d m_frontLeftLocation = new Translation2d(Units.inchesToMeters(19.1), Units.inchesToMeters(19.1)); // check to see if 19.1 is the correct length in inches, but we're pretty sure it is from doing math stuff
+  Translation2d m_frontRightLocation = new Translation2d(Units.inchesToMeters(19.1), -Units.inchesToMeters(19.1));
+  Translation2d m_backLeftLocation = new Translation2d(-Units.inchesToMeters(19.1), Units.inchesToMeters(19.1));
+  Translation2d m_backRightLocation = new Translation2d(-Units.inchesToMeters(19.1), -Units.inchesToMeters(19.1));
+
+  // creation of kinematics with utilization of wheel locations
+      MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics
+        (m_frontRightLocation, m_frontLeftLocation, m_backRightLocation, m_backLeftLocation);
   
 
 
