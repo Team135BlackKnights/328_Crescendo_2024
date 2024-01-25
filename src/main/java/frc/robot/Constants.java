@@ -23,14 +23,19 @@ public final class Constants {
     public static final int BACK_LEFT_MOTOR = 13;
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
+
   }
 
 
-// lift and intake motors
+// lift and intake motor
   public static final int Lift_ID = 20;
   public static final int Lift_ID2 = 21;
   public static int intakeMotorID = 30;
 
+  // Robot Max Speeds
+  public static final double MAX_SPEED_METERS_PER_SECOND = 3;
+  public static final double MAX_SPEED_HORIZONTAL_METERS_PER_SECOND = 3;
+  public static final double MAX_SPEED_ROTATION_METERS_PER_SECOND = 3;
   // encoders 
   public static Encoder FRONT_LEFT_DRIVE_ENCODER;
   public static Encoder FRONT_RIGHT_DRIVE_ENCODER;

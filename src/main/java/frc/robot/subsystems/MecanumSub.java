@@ -11,6 +11,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import MecanumDriveWheelSpeeds;
 
 import com.ctre.phoenix6.hardware.TalonFX;
 //import com.revrobotics.CANSparkMax;
@@ -32,16 +33,16 @@ import com.ctre.phoenix6.hardware.TalonFX;
   public TalonFX backLeft = new TalonFX(Constants.BACK_LEFT_MOTOR); 
 
   public MecanumDrive drive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
-
+  
   Translation2d m_frontLeftLocation = new Translation2d(Units.inchesToMeters(19.1), Units.inchesToMeters(19.1)); // check to see if 19.1 is the correct length in inches, but we're pretty sure it is from doing math stuff
   Translation2d m_frontRightLocation = new Translation2d(Units.inchesToMeters(19.1), -Units.inchesToMeters(19.1));
   Translation2d m_backLeftLocation = new Translation2d(-Units.inchesToMeters(19.1), Units.inchesToMeters(19.1));
   Translation2d m_backRightLocation = new Translation2d(-Units.inchesToMeters(19.1), -Units.inchesToMeters(19.1));
 
   // creation of kinematics with utilization of wheel locations
-      MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics
-        (m_frontRightLocation, m_frontLeftLocation, m_backRightLocation, m_backLeftLocation);
-  
+  MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics
+    (m_frontRightLocation, m_frontLeftLocation, m_backRightLocation, m_backLeftLocation);
+  MecanumDriveWheelSpeeds m_speeds = new MechanumDriveWheelSpeeds(0,0,0,0);
 
 
 
@@ -49,41 +50,8 @@ import com.ctre.phoenix6.hardware.TalonFX;
     
   }
 
-
-
-  /**
-   * Example command factory method.
-   *
-   * @return a command
-   */
-  public Command exampleMethodCommand() {
-    // Inline construction of command goes here.
-    // Subsystem::RunOnce implicitly requires `this` subsystem.
-    return runOnce(
-        () -> {
-          /* one-time action goes here */
-        });
-  }
-
-
-
-  /**
-   * An example method querying a boolean state of the subsystem (for example, a digital sensor).
-   *
-   * @return value of some boolean subsystem state, such as a digital sensor.
-   */
-  public boolean exampleCondition() {
-    // Query some boolean state, such as a digital sensor.
-    return false;
-  }
-
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
-
-  @Override
-  public void simulationPeriodic() {
-    // This method will be called once per scheduler run during simulation
+  public DrivefromChassisSpeeds(ChassisSpeeds speeds) {
+    m_speeds = m_kinematics.toWheelSpeeds(speeds);
+    frontLeft.set()
   }
 }

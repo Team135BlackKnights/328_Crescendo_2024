@@ -7,6 +7,7 @@ package frc.robot.commands;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.MecanumSub;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 
 /** An example command that uses an example subsystem. */
 public class DriveCommand extends Command {
@@ -17,6 +18,7 @@ public class DriveCommand extends Command {
 
   public DriveCommand(MecanumSub subsystem) {
     m_subsystem = subsystem;
+    ChassisSpeeds speeds;
     // Use addRequirements() here to declare subsystem dependencies
     addRequirements(subsystem);
   }
@@ -29,6 +31,7 @@ public class DriveCommand extends Command {
   @Override
   public void execute() {
     m_subsystem.drive.driveCartesian(RobotContainer.m_driverController.getLeftX(), RobotContainer.m_driverController.getLeftY(), RobotContainer.m_driverController.getRightX());
+    speeds = new ChassisSpeeds(RobotContainer.m_driverController.getLeftX()*Constants.MAX_SPEED_HORIZONTAL_METERS_PER_SECOND, RobotContainer.m_driverController.getLeftY()*Constants.MAX_SPEED_METERS_PER_SECOND, RobotContainer.m_driverController.getRightX()*Constants.MAX_SPEED_ROTATION_METERS_PER_SECOND);
   }
 
   // Called once the command ends or is interrupted.
