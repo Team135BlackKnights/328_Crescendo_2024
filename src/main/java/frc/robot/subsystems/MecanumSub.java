@@ -10,8 +10,8 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 import com.ctre.phoenix6.hardware.TalonFX;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkLowLevel.MotorType;
+//import com.revrobotics.CANSparkMax;
+//import com.revrobotics.CANSparkLowLevel.MotorType;
 
 
 /*public class MecanumSub extends SubsystemBase {
@@ -20,6 +20,8 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
   public CANSparkMax backRight = new CANSparkMax(Constants.BACK_RIGHT_MOTOR, MotorType.kBrushless);
   public CANSparkMax backLeft = new CANSparkMax(Constants.BACK_LEFT_MOTOR, MotorType.kBrushless); */
 
+
+  //its the motors gang
   public class MecanumSub extends SubsystemBase {
   public TalonFX frontLeft = new TalonFX(Constants.FRONT_LEFT_MOTOR);
   public TalonFX frontRight = new TalonFX(Constants.FRONT_RIGHT_MOTOR);

@@ -21,7 +21,7 @@ public class IntakeC extends Command {
 
     @Override
     public void execute() {
-        /*
+        /* 
        if(RobotContainer.m_driverController.getAButton() == true) {//     When the a button is pressed it spins the wheeles on the intake
         intakeS.inOutMotor1.set(-1);
         intakeS.inOutMotor2.set(1);
@@ -33,7 +33,7 @@ public class IntakeC extends Command {
         intakeS.inOutMotor2.set(0);
     } 
 
-
+// add to IntakeS when we use this, please and no thank you
     if(RobotContainer.m_driverController.getXButton() == true) {// when the x button is pressed it squeezes the game object
         intakeS.squeezeMotor.set(0.05);
     } else if (RobotContainer.m_driverController.getYButton() == true) {// when the buton y is pressed it releases the game object
