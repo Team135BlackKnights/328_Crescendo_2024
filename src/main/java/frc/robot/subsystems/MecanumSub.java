@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
@@ -42,16 +43,16 @@ import com.ctre.phoenix6.hardware.TalonFX;
   // creation of kinematics with utilization of wheel locations
   MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics
     (m_frontRightLocation, m_frontLeftLocation, m_backRightLocation, m_backLeftLocation);
-  MecanumDriveWheelSpeeds m_speeds = new MechanumDriveWheelSpeeds(0,0,0,0);
+  MecanumDriveWheelSpeeds m_speeds = new MecanumDriveWheelSpeeds(0,0,0,0);
 
 
 
-  public MecanumSub() {
-    
+  public MecanumSub(ChassisSpeeds speeds) {
+       m_speeds = m_kinematics.toWheelSpeeds(speeds);
+    frontLeft.set(0.5);
+    frontRight.set(0.5);
+    backLeft.set(0.5);
+    backRight.set(0.5);
   }
 
-  public DrivefromChassisSpeeds(ChassisSpeeds speeds) {
-    m_speeds = m_kinematics.toWheelSpeeds(speeds);
-    frontLeft.set()
-  }
 }
