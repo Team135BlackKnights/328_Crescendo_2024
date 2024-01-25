@@ -2,7 +2,6 @@ package frc.robot.commands;
 
 import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IntakeS;
 
 /** An example command that uses an example subsystem. */
