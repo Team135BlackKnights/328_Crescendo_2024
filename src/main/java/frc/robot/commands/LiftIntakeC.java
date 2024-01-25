@@ -1,4 +1,4 @@
-package main.java.frc.robot.commands;
+package frc.robot.commands;
 
 import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj2.command.Command;

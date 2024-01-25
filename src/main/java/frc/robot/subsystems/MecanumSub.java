@@ -11,7 +11,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import MecanumDriveWheelSpeeds;
+import edu.wpi.first.math.kinematics.MecanumDriveWheelSpeeds;
 
 import com.ctre.phoenix6.hardware.TalonFX;
 //import com.revrobotics.CANSparkMax;
