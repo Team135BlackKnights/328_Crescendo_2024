@@ -36,9 +36,11 @@ public final class Constants {
   public static final double MAX_SPEED_METERS_PER_SECOND = 3;
   public static final double MAX_SPEED_HORIZONTAL_METERS_PER_SECOND = 3;
   public static final double MAX_SPEED_ROTATION_METERS_PER_SECOND = 3;
+  double distance = 19.1;
   // encoders 
   public static Encoder FRONT_LEFT_DRIVE_ENCODER;
   public static Encoder FRONT_RIGHT_DRIVE_ENCODER;
   public static Encoder BACK_LEFT_DRIVE_ENCODER;
   public static Encoder BACK_RIGHT_DRIVE_ENCODER;
+
 }
