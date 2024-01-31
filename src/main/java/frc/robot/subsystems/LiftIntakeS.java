@@ -1,7 +1,5 @@
 
-
-
-package frc.robot.subsystems;
+package main.java.frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
