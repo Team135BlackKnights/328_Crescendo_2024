@@ -11,7 +11,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import MecanumDriveWheelSpeeds;
+import edu.wpi.first.math.kinematics.MecanumDriveWheelSpeeds;
 
 import com.ctre.phoenix6.hardware.TalonFX;
 //import com.revrobotics.CANSparkMax;
@@ -34,15 +34,15 @@ import com.ctre.phoenix6.hardware.TalonFX;
 
   public MecanumDrive drive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
   
-  Translation2d m_frontLeftLocation = new Translation2d(Units.inchesToMeters(19.1), Units.inchesToMeters(19.1)); // check to see if 19.1 is the correct length in inches, but we're pretty sure it is from doing math stuff
-  Translation2d m_frontRightLocation = new Translation2d(Units.inchesToMeters(19.1), -Units.inchesToMeters(19.1));
-  Translation2d m_backLeftLocation = new Translation2d(-Units.inchesToMeters(19.1), Units.inchesToMeters(19.1));
-  Translation2d m_backRightLocation = new Translation2d(-Units.inchesToMeters(19.1), -Units.inchesToMeters(19.1));
+  Translation2d m_frontLeftLocation = new Translation2d(Units.inchesToMeters(15.4), Units.inchesToMeters(15.4)); // check to see if 19.1 is the correct length in inches, but we're pretty sure it is from doing math stuff
+  Translation2d m_frontRightLocation = new Translation2d(Units.inchesToMeters(15.4), -Units.inchesToMeters(15.4));
+  Translation2d m_backLeftLocation = new Translation2d(-Units.inchesToMeters(15.4), Units.inchesToMeters(15.4));
+  Translation2d m_backRightLocation = new Translation2d(-Units.inchesToMeters(15.4), -Units.inchesToMeters(15.4));
 
   // creation of kinematics with utilization of wheel locations
   MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics
     (m_frontRightLocation, m_frontLeftLocation, m_backRightLocation, m_backLeftLocation);
-  MecanumDriveWheelSpeeds m_speeds = new MechanumDriveWheelSpeeds(0,0,0,0);
+  MecanumDriveWheelSpeeds m_speeds = new MecanumDriveWheelSpeeds(0,0,0,0);
 
 
 
