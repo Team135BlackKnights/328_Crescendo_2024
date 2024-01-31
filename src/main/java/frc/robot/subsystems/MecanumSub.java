@@ -35,30 +35,34 @@ import com.ctre.phoenix6.hardware.TalonFX;
   Translation2d m_backLeftLocation = new Translation2d(-Units.inchesToMeters(19.1), Units.inchesToMeters(19.1));
   Translation2d m_backRightLocation = new Translation2d(-Units.inchesToMeters(19.1), -Units.inchesToMeters(19.1));
 
+<<<<<<< HEAD
   //private final AnalogGyro m_gyro = new AnalogGyro(0);
+=======
+private final AnalogGyro m_gyro = new AnalogGyro(0);
+>>>>>>> 39264422a4a6de85ada6a37e406b8789f479bb53
   // creation of kinematics with utilization of wheel locations
   MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics
     (m_frontRightLocation, m_frontLeftLocation, m_backRightLocation, m_backLeftLocation);
   MecanumDriveWheelSpeeds m_speeds = new MecanumDriveWheelSpeeds(0,0,0,0);
 
- /* MecanumDriveOdometry m_odometry = new MecanumDriveOdometry(m_kinematics, m_gyro.getRotation2d(), getCurrentDistances());*/
-  
+  MecanumDriveOdometry m_odometry = new MecanumDriveOdometry
+  (m_kinematics, m_gyro.getRotation2d(), getCurrentDistances());
 
-  /*public MecanumSub() {
-    // Sets the distance per pulse for the encoders
-    m_leftEncoder.setDistancePerPulse(Constants.FRONT_LEFT_DRIVE_ENCODER);
+
+  public MecanumSub() {
+        // Sets the distance per pulse for the encoders
+    FRONT_LEFT_DRIVE_ENCODER.setDistancePerPulse(Constants.kEncoderDistancePerPulse);
     m_leftEncoder.setDistancePerPulse(Constants.kEncoderDistancePerPulse);
     m_leftEncoder.setDistancePerPulse(Constants.kEncoderDistancePerPulse);
     m_rightEncoder.setDistancePerPulse(Constants.kEncoderDistancePerPulse);
 
     resetEncoders();
     m_odometry =
-        new MecanumDriveOdometry(
-            m_gyro.getRotation2d(), m_leftEncoder.getDistance(), m_rightEncoder.getDistance());
-  }*/
+        new MecanumDriveOdometry (m_kinematics, m_gyro.getRotation2d(), getCurrentDistances());
+  }
 
- /* public DrivefromChassisSpeeds(ChassisSpeeds speeds) {
+   public DrivefromChassisSpeeds(ChassisSpeeds speeds) {
     m_speeds = m_kinematics.toWheelSpeeds(speeds);
     frontLeft.set();
-  }*/
+  }
 }
