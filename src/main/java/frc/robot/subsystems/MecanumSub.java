@@ -44,18 +44,18 @@ import com.ctre.phoenix6.hardware.TalonFX;
  /* MecanumDriveOdometry m_odometry = new MecanumDriveOdometry(m_kinematics, m_gyro.getRotation2d(), getCurrentDistances());*/
   
 
-  public MecanumSub() {
+  /*public MecanumSub() {
     // Sets the distance per pulse for the encoders
-  /*  m_leftEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
-    m_leftEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
-    m_leftEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
-    m_rightEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
+    m_leftEncoder.setDistancePerPulse(Constants.FRONT_LEFT_DRIVE_ENCODER);
+    m_leftEncoder.setDistancePerPulse(Constants.kEncoderDistancePerPulse);
+    m_leftEncoder.setDistancePerPulse(Constants.kEncoderDistancePerPulse);
+    m_rightEncoder.setDistancePerPulse(Constants.kEncoderDistancePerPulse);
 
     resetEncoders();
     m_odometry =
         new MecanumDriveOdometry(
-            m_gyro.getRotation2d(), m_leftEncoder.getDistance(), m_rightEncoder.getDistance());*/
-  }
+            m_gyro.getRotation2d(), m_leftEncoder.getDistance(), m_rightEncoder.getDistance());
+  }*/
 
  /* public DrivefromChassisSpeeds(ChassisSpeeds speeds) {
     m_speeds = m_kinematics.toWheelSpeeds(speeds);
