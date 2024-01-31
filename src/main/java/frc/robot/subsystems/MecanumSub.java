@@ -9,13 +9,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
-<<<<<<< HEAD
 import edu.wpi.first.math.kinematics.MecanumDriveOdometry;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.AnalogGyro;
-=======
-import edu.wpi.first.math.util.Units;
->>>>>>> parent of 602e94c (Worked on some odometry stuff, there are a couple of errors)
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.math.kinematics.MecanumDriveWheelSpeeds;
 
@@ -34,19 +30,12 @@ import com.ctre.phoenix6.hardware.TalonFX;
 
   public MecanumDrive drive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
   
-<<<<<<< HEAD
-  Translation2d m_frontLeftLocation = new Translation2d(Units.inchesToMeters(15.4), Units.inchesToMeters(15.4)); // check to see if 19.1 is the correct length in inches, but we're pretty sure it is from doing math stuff
-  Translation2d m_frontRightLocation = new Translation2d(Units.inchesToMeters(15.4), -Units.inchesToMeters(15.4));
-  Translation2d m_backLeftLocation = new Translation2d(-Units.inchesToMeters(15.4), Units.inchesToMeters(15.4));
-  Translation2d m_backRightLocation = new Translation2d(-Units.inchesToMeters(15.4), -Units.inchesToMeters(15.4));
-=======
   Translation2d m_frontLeftLocation = new Translation2d(Units.inchesToMeters(19.1), Units.inchesToMeters(19.1)); // check to see if 19.1 is the correct length in inches, but we're pretty sure it is from doing math stuff
   Translation2d m_frontRightLocation = new Translation2d(Units.inchesToMeters(19.1), -Units.inchesToMeters(19.1));
   Translation2d m_backLeftLocation = new Translation2d(-Units.inchesToMeters(19.1), Units.inchesToMeters(19.1));
   Translation2d m_backRightLocation = new Translation2d(-Units.inchesToMeters(19.1), -Units.inchesToMeters(19.1));
->>>>>>> parent of 602e94c (Worked on some odometry stuff, there are a couple of errors)
 
-  private final AnalogGyro m_gyro = new AnalogGyro(0);
+  //private final AnalogGyro m_gyro = new AnalogGyro(0);
   // creation of kinematics with utilization of wheel locations
   MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics
     (m_frontRightLocation, m_frontLeftLocation, m_backRightLocation, m_backLeftLocation);
@@ -55,23 +44,12 @@ import com.ctre.phoenix6.hardware.TalonFX;
  /* MecanumDriveOdometry m_odometry = new MecanumDriveOdometry(m_kinematics, m_gyro.getRotation2d(), getCurrentDistances());*/
   
 
-<<<<<<< HEAD
   /*public MecanumSub() {
     // Sets the distance per pulse for the encoders
     m_leftEncoder.setDistancePerPulse(Constants.FRONT_LEFT_DRIVE_ENCODER);
     m_leftEncoder.setDistancePerPulse(Constants.kEncoderDistancePerPulse);
     m_leftEncoder.setDistancePerPulse(Constants.kEncoderDistancePerPulse);
     m_rightEncoder.setDistancePerPulse(Constants.kEncoderDistancePerPulse);
-=======
-
-  public MecanumSub(ChassisSpeeds speeds) {
-       m_speeds = m_kinematics.toWheelSpeeds(speeds);
-    frontLeft.set(0.5);
-    frontRight.set(0.5);
-    backLeft.set(0.5);
-    backRight.set(0.5);
-  }
->>>>>>> parent of 602e94c (Worked on some odometry stuff, there are a couple of errors)
 
     resetEncoders();
     m_odometry =

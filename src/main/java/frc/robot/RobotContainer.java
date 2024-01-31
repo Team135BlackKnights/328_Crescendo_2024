@@ -5,9 +5,14 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.DriveCommand;
+import frc.robot.commands.IntakeC;
+import frc.robot.subsystems.MecanumSub;
 import edu.wpi.first.wpilibj.XboxController;
-
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.subsystems.IntakeS;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -15,25 +20,32 @@ import edu.wpi.first.wpilibj.XboxController;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are 
-
-  
+  public static final String controller2 = null;
+    MecanumSub _driveSub = new MecanumSub();
+    DriveCommand _DriveCommand = new DriveCommand(_driveSub);
+    IntakeS intakeS = new IntakeS();
+    IntakeC intakeC = new IntakeC(intakeS);
+// The robot's subsystems and commands are defined here...
+  private final MecanumSub m_exampleSubsystem = new MecanumSub();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-
-  public static XboxController m_driverController =
+  public final static XboxController m_driverController =
       new XboxController(OperatorConstants.kDriverControllerPort);
-
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+
+    intakeS.setDefaultCommand(intakeC);
+    _driveSub.setDefaultCommand(_DriveCommand);
+  
+    
   }
+  
 
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
-   * 
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
    * predicate, or via the named factories in {@link
    * edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for {@link
@@ -43,8 +55,8 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-
   }
+
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
@@ -55,3 +67,4 @@ public class RobotContainer {
     return null;
   }
 }
+// robot container
