@@ -3,7 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
-import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
+
 import edu.wpi.first.wpilibj.Encoder;
 
 /**
@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.Encoder;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-      public static final int FRONT_LEFT_MOTOR = 10;
+    public static final int FRONT_LEFT_MOTOR = 10;
     public static final int FRONT_RIGHT_MOTOR = 11;
     public static final int BACK_RIGHT_MOTOR = 12;
     public static final int BACK_LEFT_MOTOR = 13;
@@ -27,12 +27,8 @@ public final class Constants {
     public static final double kaVoltSecondsSquaredPerMeter = 0.2;
 
     // Example value only - as above, this must be tuned for your drive!
+
     public static final double kPDriveVel = 8.5;
-
-    public static final double kTrackwidthMeters = 0.69;
-    public static final MecanumDriveKinematics kDriveKinematics =
-        new MecanumDriveKinematics(kTrackwidthMeters);
-
         public static final double kMaxSpeedMetersPerSecond = 3;
         public static final double kMaxAccelerationMetersPerSecondSquared = 1;
 
@@ -42,9 +38,9 @@ public final class Constants {
 
 
 // lift and intake motor
-  public static final int Lift_ID = 20;
-  public static final int Lift_ID2 = 21;
-  public static int intakeMotorID = 30;
+  public static final int Lift_ID = 30;
+  public static final int Lift_ID2 = 31;
+  public static int intakeMotorID = 20;
 
   // Robot Max Speeds
   public static final double MAX_SPEED_METERS_PER_SECOND = 3;

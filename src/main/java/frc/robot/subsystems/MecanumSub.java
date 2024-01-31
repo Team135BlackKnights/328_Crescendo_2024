@@ -9,7 +9,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
+import edu.wpi.first.math.kinematics.MecanumDriveOdometry;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.math.kinematics.MecanumDriveWheelSpeeds;
 
@@ -17,12 +19,6 @@ import com.ctre.phoenix6.hardware.TalonFX;
 //import com.revrobotics.CANSparkMax;
 //import com.revrobotics.CANSparkLowLevel.MotorType;
 
-
-/*public class MecanumSub extends SubsystemBase {
-  public CANSparkMax frontLeft = new CANSparkMax(Constants.FRONT_LEFT_MOTOR, MotorType.kBrushless);
-  public CANSparkMax frontRight = new CANSparkMax(Constants.FRONT_RIGHT_MOTOR, MotorType.kBrushless);
-  public CANSparkMax backRight = new CANSparkMax(Constants.BACK_RIGHT_MOTOR, MotorType.kBrushless);
-  public CANSparkMax backLeft = new CANSparkMax(Constants.BACK_LEFT_MOTOR, MotorType.kBrushless); */
 
 
   //its the motors gang
@@ -39,28 +35,30 @@ import com.ctre.phoenix6.hardware.TalonFX;
   Translation2d m_backLeftLocation = new Translation2d(-Units.inchesToMeters(15.4), Units.inchesToMeters(15.4));
   Translation2d m_backRightLocation = new Translation2d(-Units.inchesToMeters(15.4), -Units.inchesToMeters(15.4));
 
+  private final AnalogGyro m_gyro = new AnalogGyro(0);
   // creation of kinematics with utilization of wheel locations
   MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics
     (m_frontRightLocation, m_frontLeftLocation, m_backRightLocation, m_backLeftLocation);
   MecanumDriveWheelSpeeds m_speeds = new MecanumDriveWheelSpeeds(0,0,0,0);
 
-
+ /* MecanumDriveOdometry m_odometry = new MecanumDriveOdometry(m_kinematics, m_gyro.getRotation2d(), getCurrentDistances());*/
+  
 
   public MecanumSub() {
-    m_rightMotors.setInverted(true);
-
     // Sets the distance per pulse for the encoders
+  /*  m_leftEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
+    m_leftEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
     m_leftEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
     m_rightEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
 
     resetEncoders();
     m_odometry =
-        new DifferentialDriveOdometry(
-            m_gyro.getRotation2d(), m_leftEncoder.getDistance(), m_rightEncoder.getDistance());
+        new MecanumDriveOdometry(
+            m_gyro.getRotation2d(), m_leftEncoder.getDistance(), m_rightEncoder.getDistance());*/
   }
 
-  public DrivefromChassisSpeeds(ChassisSpeeds speeds) {
+ /* public DrivefromChassisSpeeds(ChassisSpeeds speeds) {
     m_speeds = m_kinematics.toWheelSpeeds(speeds);
     frontLeft.set();
-  }
+  }*/
 }
