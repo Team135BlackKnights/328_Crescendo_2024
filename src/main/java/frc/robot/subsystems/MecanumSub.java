@@ -40,19 +40,13 @@ import com.ctre.phoenix6.hardware.TalonFX;
   Translation2d m_backLeftLocation = new Translation2d(-Units.inchesToMeters(19.1), Units.inchesToMeters(19.1));
   Translation2d m_backRightLocation = new Translation2d(-Units.inchesToMeters(19.1), -Units.inchesToMeters(19.1));
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  //private final AnalogGyro m_gyro = new AnalogGyro(0);
-=======
-=======
   private final Encoder m_frontLeftEncoder = new Encoder(0,1);
   private final Encoder m_frontRightEncoder = new Encoder(2,3);
   private final Encoder m_backLeftEncoder = new Encoder(4,5);
   private final Encoder m_backRightEncoder = new Encoder(6,7);
 
->>>>>>> c7aa9027b3a67cb58012e1b8e5b625d96d0d5e6e
+
 private final AnalogGyro m_gyro = new AnalogGyro(0);
->>>>>>> 39264422a4a6de85ada6a37e406b8789f479bb53
   // creation of kinematics with utilization of wheel locations
   MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics
     (m_frontRightLocation, m_frontLeftLocation, m_backRightLocation, m_backLeftLocation);
