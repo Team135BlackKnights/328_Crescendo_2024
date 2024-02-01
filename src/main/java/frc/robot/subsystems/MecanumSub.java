@@ -7,9 +7,14 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
 import edu.wpi.first.math.kinematics.MecanumDriveOdometry;
+import edu.wpi.first.math.kinematics.MecanumDriveWheelPositions;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
@@ -36,8 +41,16 @@ import com.ctre.phoenix6.hardware.TalonFX;
   Translation2d m_backRightLocation = new Translation2d(-Units.inchesToMeters(19.1), -Units.inchesToMeters(19.1));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   //private final AnalogGyro m_gyro = new AnalogGyro(0);
 =======
+=======
+  private final Encoder m_frontLeftEncoder = new Encoder(0,1);
+  private final Encoder m_frontRightEncoder = new Encoder(2,3);
+  private final Encoder m_backLeftEncoder = new Encoder(4,5);
+  private final Encoder m_backRightEncoder = new Encoder(6,7);
+
+>>>>>>> c7aa9027b3a67cb58012e1b8e5b625d96d0d5e6e
 private final AnalogGyro m_gyro = new AnalogGyro(0);
 >>>>>>> 39264422a4a6de85ada6a37e406b8789f479bb53
   // creation of kinematics with utilization of wheel locations
@@ -45,24 +58,37 @@ private final AnalogGyro m_gyro = new AnalogGyro(0);
     (m_frontRightLocation, m_frontLeftLocation, m_backRightLocation, m_backLeftLocation);
   MecanumDriveWheelSpeeds m_speeds = new MecanumDriveWheelSpeeds(0,0,0,0);
 
-  MecanumDriveOdometry m_odometry = new MecanumDriveOdometry
-  (m_kinematics, m_gyro.getRotation2d(), getCurrentDistances());
+  Pose2d m_pose = new Pose2d();
 
+  MecanumDriveOdometry m_odometry = new MecanumDriveOdometry(
+  m_kinematics,
+  m_gyro.getRotation2d(),
+  new MecanumDriveWheelPositions(
+    m_frontLeftEncoder.getDistance(), m_frontRightEncoder.getDistance(),
+    m_backLeftEncoder.getDistance(), m_backRightEncoder.getDistance()
+  ),
+  new Pose2d(5.0, 13.5, new Rotation2d())
+);
+
+public void periodic() {
+  // Get my wheel positions
+  var wheelPositions = new MecanumDriveWheelPositions(
+    m_frontLeftEncoder.getDistance(), m_frontRightEncoder.getDistance(),
+    m_backLeftEncoder.getDistance(), m_backRightEncoder.getDistance());
+
+  // Get the rotation of the robot from the gyro.
+  var gyroAngle = m_gyro.getRotation2d();
+
+  // Update the pose
+  m_pose = m_odometry.update(gyroAngle, wheelPositions);
+}
 
   public MecanumSub() {
-        // Sets the distance per pulse for the encoders
-    FRONT_LEFT_DRIVE_ENCODER.setDistancePerPulse(Constants.kEncoderDistancePerPulse);
-    m_leftEncoder.setDistancePerPulse(Constants.kEncoderDistancePerPulse);
-    m_leftEncoder.setDistancePerPulse(Constants.kEncoderDistancePerPulse);
-    m_rightEncoder.setDistancePerPulse(Constants.kEncoderDistancePerPulse);
 
-    resetEncoders();
-    m_odometry =
-        new MecanumDriveOdometry (m_kinematics, m_gyro.getRotation2d(), getCurrentDistances());
   }
 
-   public DrivefromChassisSpeeds(ChassisSpeeds speeds) {
+   public MecanumSub(ChassisSpeeds speeds) {
     m_speeds = m_kinematics.toWheelSpeeds(speeds);
-    frontLeft.set();
+    frontLeft.set(1);
+    }
   }
-}
