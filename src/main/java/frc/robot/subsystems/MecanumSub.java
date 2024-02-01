@@ -83,6 +83,6 @@ public void periodic() {
 
    public MecanumSub(ChassisSpeeds speeds) {
     m_speeds = m_kinematics.toWheelSpeeds(speeds);
-    frontLeft.set(1);
+    frontLeft.set(0.5);
     }
   }

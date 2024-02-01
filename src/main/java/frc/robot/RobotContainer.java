@@ -26,7 +26,7 @@ public class RobotContainer {
     IntakeS intakeS = new IntakeS();
     IntakeC intakeC = new IntakeC(intakeS);
 // The robot's subsystems and commands are defined here...
-  private final MecanumSub m_exampleSubsystem = new MecanumSub();
+
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   public final static XboxController m_driverController =
