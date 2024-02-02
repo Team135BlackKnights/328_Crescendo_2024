@@ -54,6 +54,7 @@ private final AnalogGyro m_gyro = new AnalogGyro(0);
 
   Pose2d m_pose = new Pose2d();
 
+  // kinematics and odometry
   MecanumDriveOdometry m_odometry = new MecanumDriveOdometry(
   m_kinematics,
   m_gyro.getRotation2d(),
@@ -80,7 +81,8 @@ public void periodic() {
   public MecanumSub() {
 
   }
-
+  
+  // sets wheel speeds
    public MecanumSub(ChassisSpeeds speeds) {
     m_speeds = m_kinematics.toWheelSpeeds(speeds);
     frontLeft.set(0.5);
