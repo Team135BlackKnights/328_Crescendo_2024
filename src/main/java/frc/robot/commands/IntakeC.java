@@ -34,6 +34,7 @@ public class IntakeC extends Command {
     } 
 
 // add to IntakeS when we use this, please and no thank you
+
     if(RobotContainer.m_driverController.getXButton() == true) {// when the x button is pressed it squeezes the game object
         intakeS.squeezeMotor.set(0.05);
     } else if (RobotContainer.m_driverController.getYButton() == true) {// when the buton y is pressed it releases the game object
