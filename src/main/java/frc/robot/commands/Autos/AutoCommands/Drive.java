@@ -20,6 +20,7 @@ double autoSpeed;
         addRequirements(subsystem);
         
     }
+
     public void initialize(){
         System.out.print("Running forwardDriveAuto...");
     timeElapsed.start();
