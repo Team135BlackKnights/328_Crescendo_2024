@@ -8,6 +8,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeC;
 import frc.robot.subsystems.MecanumSub;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -26,7 +27,6 @@ public class RobotContainer {
     IntakeS intakeS = new IntakeS();
     IntakeC intakeC = new IntakeC(intakeS);
 // The robot's subsystems and commands are defined here...
-
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   public final static XboxController m_driverController =
@@ -63,7 +63,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    // An example command will be run in autonomous
     return null;
   }
 }

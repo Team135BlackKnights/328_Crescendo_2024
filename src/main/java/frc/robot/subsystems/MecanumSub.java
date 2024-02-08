@@ -20,9 +20,12 @@ import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.math.kinematics.MecanumDriveWheelSpeeds;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 //import com.revrobotics.CANSparkMax;
 //import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkBase.IdleMode;
 
 
 
@@ -48,9 +51,9 @@ import com.ctre.phoenix6.hardware.TalonFX;
 
 private final AnalogGyro m_gyro = new AnalogGyro(0);
   // creation of kinematics with utilization of wheel locations
-  MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics
+ MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics
     (m_frontRightLocation, m_frontLeftLocation, m_backRightLocation, m_backLeftLocation);
-  MecanumDriveWheelSpeeds m_speeds = new MecanumDriveWheelSpeeds(0,0,0,0);
+ MecanumDriveWheelSpeeds m_speeds = new MecanumDriveWheelSpeeds(0,0,0,0);
 
   Pose2d m_pose = new Pose2d();
 
@@ -78,6 +81,14 @@ public void periodic() {
   m_pose = m_odometry.update(gyroAngle, wheelPositions);
 }
 
+    public void runStop() {
+    //Sets motors to stop when not in use
+        frontLeft.setNeutralMode(NeutralModeValue.Brake);
+        frontRight.setNeutralMode(NeutralModeValue.Brake);
+        backLeft.setNeutralMode(NeutralModeValue.Brake);
+        backRight.setNeutralMode(NeutralModeValue.Brake); 
+    }
+
   public MecanumSub() {
 
   }
@@ -87,4 +98,10 @@ public void periodic() {
     m_speeds = m_kinematics.toWheelSpeeds(speeds);
     frontLeft.set(0.5);
     }
+
+  public void MecanumDrive(double frontLeft,double backLeft,double frontRight,double backRight) {
+      MecanumDrive(frontLeft, backLeft, frontRight, backRight);
+  }
+
+
   }
