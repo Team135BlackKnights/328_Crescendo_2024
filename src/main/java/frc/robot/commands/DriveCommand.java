@@ -7,11 +7,16 @@ package frc.robot.commands;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.MecanumSub;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 
 /** An example command that uses an example subsystem.*/
 public class DriveCommand extends Command {
+
+
+
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final MecanumSub m_subsystem;
 
@@ -43,5 +48,7 @@ public class DriveCommand extends Command {
   public boolean isFinished() {
     return false;
   }
+  // A chooser for autonomous commands
+  SendableChooser<Command> m_chooser = new SendableChooser<>();
   
 }

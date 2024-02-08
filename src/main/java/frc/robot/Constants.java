@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Encoder;
-
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -41,6 +39,11 @@ public final class Constants {
   public static final int Lift_ID = 30;
   public static final int Lift_ID2 = 31;
   public static int intakeMotorID = 20;
+
+
+//placeholder values for autos
+  public static int kAutoDriveSpeed = 3;
+  public static int kAutoDriveDistanceInches = 3;
 
   // Robot Max Speeds
   public static final double MAX_SPEED_METERS_PER_SECOND = 3;
