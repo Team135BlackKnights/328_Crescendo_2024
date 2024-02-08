@@ -13,8 +13,8 @@ import frc.robot.Constants;
 
 public class IntakeS extends SubsystemBase { //create a subsystem
 
-    public CANSparkMax intakeMotor = new CANSparkMax(Constants.intakeMotorID,MotorType.kBrushless);
-    public RelativeEncoder intakeEncoder = intakeMotor.getEncoder();
+    public static CANSparkMax intakeMotor = new CANSparkMax(Constants.intakeMotorID,MotorType.kBrushless);
+    public static RelativeEncoder intakeEncoder = intakeMotor.getEncoder();
 
     public IntakeS(){
       intakeMotor.enableVoltageCompensation(12);
@@ -27,7 +27,7 @@ public class IntakeS extends SubsystemBase { //create a subsystem
 
 
 
-    public void resetEncoders() {
+    public static void resetEncoders() {
       //Sets position of the encoder
            intakeEncoder.setPosition(0);
       }
