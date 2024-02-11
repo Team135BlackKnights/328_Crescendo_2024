@@ -11,6 +11,9 @@ import frc.robot.commands.Autos.Auto;
 import frc.robot.commands.Autos.AutoCommands.Drive;
 import frc.robot.subsystems.MecanumSub;
 
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -27,28 +30,29 @@ import frc.robot.subsystems.IntakeS;
 public class RobotContainer {
   public static final String controller2 = null;
     public static MecanumSub _driveSub = new MecanumSub();
-    DriveCommand _DriveCommand = new DriveCommand(_driveSub);
-    IntakeS intakeS = new IntakeS();
-    IntakeC intakeC = new IntakeC(intakeS);
+    //IntakeS intakeS = new IntakeS();
+    //IntakeC intakeC = new IntakeC(intakeS);
+    private final SendableChooser<Command> autoChooser;
 // The robot's subsystems and commands are defined here...
-  public static Auto driveout = new Auto(_driveSub);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   public final static XboxController m_driverController =
       new XboxController(OperatorConstants.kDriverControllerPort);
 
-      SendableChooser<Command> m_Chooser = new SendableChooser<>();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
 
-    intakeS.setDefaultCommand(intakeC);
-    _driveSub.setDefaultCommand(_DriveCommand);
- 
-    m_Chooser.setDefaultOption("Drive out", driveout);
-    SmartDashboard.putData(m_Chooser);
+   // intakeS.setDefaultCommand(intakeC);
+    _driveSub.setDefaultCommand(new DriveCommand(_driveSub));
+
+    NamedCommands.registerCommand("DriveOut", new Drive(_driveSub, 2, .5));
+    autoChooser = AutoBuilder.buildAutoChooser();
+    SmartDashboard.putData(autoChooser);
+    SmartDashboard.putData("Auto Chooser",autoChooser);
+
     // Configure the trigger bindings
     configureBindings();
   
@@ -75,6 +79,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return m_Chooser.getSelected();  }
+    return autoChooser.getSelected();  }
 }
 // robot container

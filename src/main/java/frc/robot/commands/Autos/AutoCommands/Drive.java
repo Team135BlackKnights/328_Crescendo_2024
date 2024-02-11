@@ -27,20 +27,20 @@ double autoSpeed;
     }
     public void execute() {
 
-        if (timeElapsed.get() <= seconds) {
+        //if (timeElapsed.get() <= seconds) {
             //if the time that has gone by is less than the desired time then make the robot move forward 
             
-            drive.MecanumDrive (autoSpeed, autoSpeed, autoSpeed, autoSpeed);
+       //     drive.MecanumDrive (autoSpeed, autoSpeed, autoSpeed, autoSpeed);
             //FL, BL, FR, BR
-        }
+      //  }
     }
     public void end() {
-        drive.MecanumDrive(0,0,0,0);
+       // drive.MecanumDrive(0,0,0,0);
         //at the end of auto it makes the wheels stop moving and stops the robot from moving
-        drive.runStop();
-        timeElapsed.stop();
+     ///   drive.runStop();
+      //  timeElapsed.stop();
         //stops the timer known as timeElapsed as it is not needed anymore 
-        timeElapsed.reset();
+       // timeElapsed.reset();
         //resets the timmer so that we can use it next match
 
     }
