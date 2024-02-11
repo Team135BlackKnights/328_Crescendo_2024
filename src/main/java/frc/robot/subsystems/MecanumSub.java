@@ -147,10 +147,10 @@ import com.pathplanner.lib.util.ReplanningConfig;
   public void setChassisSpeeds(ChassisSpeeds speed) {
         m_speeds = m_kinematics.toWheelSpeeds(speed);
         m_speeds.desaturate(Constants.DriveConstants.kTeleDriveMaxSpeed);
-        frontLeft.set(m_speeds.frontLeftMetersPerSecond);
-        frontRight.set(m_speeds.frontRightMetersPerSecond);
-        backLeft.set(m_speeds.rearLeftMetersPerSecond);
-        backRight.set(m_speeds.rearRightMetersPerSecond);
+        frontLeft.set(m_speeds.frontLeftMetersPerSecond/Constants.DriveConstants.kTeleDriveMaxSpeed);
+        frontRight.set(m_speeds.frontRightMetersPerSecond/Constants.DriveConstants.kTeleDriveMaxSpeed);
+        backLeft.set(m_speeds.rearLeftMetersPerSecond/Constants.DriveConstants.kTeleDriveMaxSpeed);
+        backRight.set(m_speeds.rearRightMetersPerSecond/Constants.DriveConstants.kTeleDriveMaxSpeed);
         SmartDashboard.putNumber("FRONT LEFT", m_speeds.frontLeftMetersPerSecond);
         SmartDashboard.putNumber("FRONT RIGHT", m_speeds.frontRightMetersPerSecond);
         SmartDashboard.putNumber("BACK LEFT", m_speeds.rearLeftMetersPerSecond);

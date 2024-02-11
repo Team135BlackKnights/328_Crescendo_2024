@@ -25,10 +25,10 @@ public final class Constants {
     public static class DriveConstants{
       public static final double DRIVE_BASE_RADIUS = Units.inchesToMeters(27.01);
       public static double Deadband = .01;
-      public static double kTeleDriveMaxSpeed = 1;
+      public static double kTeleDriveMaxSpeed = 6.96;
       public static double kTeleDriveMaxAcceleration = 6.71;
       public static double kTeleTurningMaxAcceleration = 3; //guess
-      public static double kMaxTurningSpeedRadPerSec = 2.285; //guess, maybe 45.67
+      public static double kMaxTurningSpeedRadPerSec = 6.96; //guess, maybe 45.67
     }
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
