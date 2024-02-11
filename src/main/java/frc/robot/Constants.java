@@ -23,12 +23,9 @@ public final class Constants {
     public static final int BACK_RIGHT_MOTOR = 13;
     public static final int BACK_LEFT_MOTOR = 11;
     public static class DriveConstants{
-      public static final double MAX_SPEED_METERS_PER_SECOND = 3;
-      public static final double MAX_SPEED_HORIZONTAL_METERS_PER_SECOND = 3;
-      public static final double MAX_SPEED_ROTATION_METERS_PER_SECOND = 3;
       public static final double DRIVE_BASE_RADIUS = Units.inchesToMeters(27.01);
       public static double Deadband = .01;
-      public static double kTeleDriveMaxSpeed = 6.96;
+      public static double kTeleDriveMaxSpeed = 1;
       public static double kTeleDriveMaxAcceleration = 6.71;
       public static double kTeleTurningMaxAcceleration = 3; //guess
       public static double kMaxTurningSpeedRadPerSec = 2.285; //guess, maybe 45.67

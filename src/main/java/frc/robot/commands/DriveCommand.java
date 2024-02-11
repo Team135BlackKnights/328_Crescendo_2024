@@ -36,8 +36,8 @@ public class DriveCommand extends Command {
   @Override
   public void execute() {
    // m_subsystem.drive.driveCartesian(RobotContainer.m_driverController.getLeftY(), RobotContainer.m_driverController.getRightX(), RobotContainer.m_driverController.getLeftX());
-   double xSpeed = -RobotContainer.m_driverController.getLeftX();
-   double ySpeed = RobotContainer.m_driverController.getLeftY();
+   double xSpeed = -RobotContainer.m_driverController.getLeftY();
+   double ySpeed = RobotContainer.m_driverController.getLeftX();
    double turningSpeed = RobotContainer.m_driverController.getRightX();
 
    xSpeed = Math.pow(xSpeed, 2) * (xSpeed < 0 ? -1 : 1);

@@ -4,7 +4,6 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -20,24 +19,21 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.math.kinematics.MecanumDriveWheelSpeeds;
-import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.math.kinematics.WheelPositions;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 import com.ctre.phoenix6.hardware.TalonFX;
-import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.auto.AutoBuilder;
+
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
 import com.pathplanner.lib.util.ReplanningConfig;
 //import com.revrobotics.CANSparkMax;
 //import com.revrobotics.CANSparkLowLevel.MotorType;
-import com.revrobotics.CANSparkBase.IdleMode;
 
 
 
@@ -107,7 +103,7 @@ import com.revrobotics.CANSparkBase.IdleMode;
       new HolonomicPathFollowerConfig(
         new PIDConstants(0,0,0),
         new PIDConstants(0,0,0),
-        Constants.DriveConstants.MAX_SPEED_METERS_PER_SECOND,
+        Constants.DriveConstants.kTeleDriveMaxSpeed,
         Constants.DriveConstants.DRIVE_BASE_RADIUS,
         new ReplanningConfig()
       ),this::getAlliance
@@ -150,10 +146,15 @@ import com.revrobotics.CANSparkBase.IdleMode;
     }
   public void setChassisSpeeds(ChassisSpeeds speed) {
         m_speeds = m_kinematics.toWheelSpeeds(speed);
+        m_speeds.desaturate(Constants.DriveConstants.kTeleDriveMaxSpeed);
         frontLeft.set(m_speeds.frontLeftMetersPerSecond);
         frontRight.set(m_speeds.frontRightMetersPerSecond);
         backLeft.set(m_speeds.rearLeftMetersPerSecond);
         backRight.set(m_speeds.rearRightMetersPerSecond);
+        SmartDashboard.putNumber("FRONT LEFT", m_speeds.frontLeftMetersPerSecond);
+        SmartDashboard.putNumber("FRONT RIGHT", m_speeds.frontRightMetersPerSecond);
+        SmartDashboard.putNumber("BACK LEFT", m_speeds.rearLeftMetersPerSecond);
+        SmartDashboard.putNumber("BACK RIGHT", m_speeds.rearRightMetersPerSecond);
     }
   public void stop(){
     frontLeft.set(0);

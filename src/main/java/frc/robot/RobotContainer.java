@@ -48,9 +48,8 @@ public class RobotContainer {
    // intakeS.setDefaultCommand(intakeC);
     _driveSub.setDefaultCommand(new DriveCommand(_driveSub));
 
-    NamedCommands.registerCommand("DriveOut", new Drive(_driveSub, 2, .5));
+    //NamedCommands.registerCommand("Pathy Boi", new Drive(_driveSub, 2, .5));
     autoChooser = AutoBuilder.buildAutoChooser();
-    SmartDashboard.putData(autoChooser);
     SmartDashboard.putData("Auto Chooser",autoChooser);
 
     // Configure the trigger bindings
