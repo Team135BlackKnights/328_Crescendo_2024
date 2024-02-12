@@ -7,8 +7,13 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeC;
+import frc.robot.commands.Autos.Auto;
+import frc.robot.commands.Autos.AutoCommands.Drive;
 import frc.robot.subsystems.MecanumSub;
+
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -21,16 +26,18 @@ import frc.robot.subsystems.IntakeS;
  */
 public class RobotContainer {
   public static final String controller2 = null;
-    MecanumSub _driveSub = new MecanumSub();
+    public static MecanumSub _driveSub = new MecanumSub();
     DriveCommand _DriveCommand = new DriveCommand(_driveSub);
     IntakeS intakeS = new IntakeS();
     IntakeC intakeC = new IntakeC(intakeS);
 // The robot's subsystems and commands are defined here...
-
+  public static Auto driveout = new Auto(_driveSub);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   public final static XboxController m_driverController =
       new XboxController(OperatorConstants.kDriverControllerPort);
+
+      SendableChooser<Command> m_Chooser = new SendableChooser<>();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -39,6 +46,11 @@ public class RobotContainer {
 
     intakeS.setDefaultCommand(intakeC);
     _driveSub.setDefaultCommand(_DriveCommand);
+ 
+    m_Chooser.setDefaultOption("Drive out", driveout);
+    SmartDashboard.putData(m_Chooser);
+    // Configure the trigger bindings
+    configureBindings();
   
     
   }
@@ -63,8 +75,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    // An example command will be run in autonomous
-    return null;
-  }
+    return m_Chooser.getSelected();  }
 }
 // robot container

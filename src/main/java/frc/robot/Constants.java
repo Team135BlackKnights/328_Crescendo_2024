@@ -4,6 +4,13 @@
 
 package frc.robot;
 
+<<<<<<< HEAD
+=======
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
+import edu.wpi.first.wpilibj.Encoder;
+
+>>>>>>> 67c47a0ba7b740f8ae81535138c7925d81a2cc4d
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -32,6 +39,7 @@ public final class Constants {
 
         public static final double kRamseteB = 2.0;
         public static final double kRamseteZeta = 0.7;
+
   }
 
 

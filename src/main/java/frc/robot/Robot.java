@@ -5,6 +5,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -16,21 +18,36 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot { //double distance up here somewhere
   private Command m_autonomousCommand;
+<<<<<<< HEAD
   private Command DriveDistance;
 
 
+=======
+>>>>>>> 67c47a0ba7b740f8ae81535138c7925d81a2cc4d
   private RobotContainer m_robotContainer;
-
+  private static final String kDefaultAuto = "Default";
+  private static final String kCustomAuto = "My Auto";
+  private String m_autoSelected;
+  private final SendableChooser<String> m_chooser = new SendableChooser<>();
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
-  @Override
-  public void robotInit() {
-    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
-    // autonomous chooser on the dashboard.
-    m_robotContainer = new RobotContainer();
-  }
+@Override
+public void robotInit() {
+  // Instantiate our RobotContainer. This will perform all our button bindings and put our
+  // autonomous chooser on the dashboard.
+  m_robotContainer = new RobotContainer();
+
+  // Add autonomous mode options to the chooser
+    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+  m_chooser.addOption("My Auto", kCustomAuto);
+
+  // Put the chooser on the SmartDashboard
+  // You can access this dropdown menu on the SmartDashboard during runtime
+  // to select the autonomous mode
+  SmartDashboard.putData("Auto choices", m_chooser);
+}
 
   /**
    * This function is called every 20 ms, no matter the mode. Use this for items like diagnostics
@@ -58,17 +75,33 @@ public class Robot extends TimedRobot { //double distance up here somewhere
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+    m_autoSelected = m_chooser.getSelected();
+    System.out.println("Auto selected: " + m_autoSelected);
+  
+    // Get the autonomous command based on the selected mode
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
-    // schedule the autonomous command (example)
+  
+    // Schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
   }
-
+  
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    // Switch based on the selected autonomous mode
+    switch (m_autoSelected) {
+      case kCustomAuto:
+        // Put custom auto code here
+        break;
+      case kDefaultAuto:
+      default:
+        // Put default auto code here
+        break;
+    }
+  }
+  
 
   @Override
   public void teleopInit() {

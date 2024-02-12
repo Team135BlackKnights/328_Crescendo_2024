@@ -20,6 +20,7 @@ public class LiftIntakeC extends Command {
     }
 
     @Override
+
     public void execute() {
         /*
     if(RobotContainer.m_driverController.getXButton() == true) {// when the x button is pressed it squeezes the game object
