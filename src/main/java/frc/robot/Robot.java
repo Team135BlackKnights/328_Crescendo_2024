@@ -18,12 +18,9 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot { //double distance up here somewhere
   private Command m_autonomousCommand;
-<<<<<<< HEAD
   private Command DriveDistance;
 
 
-=======
->>>>>>> 67c47a0ba7b740f8ae81535138c7925d81a2cc4d
   private RobotContainer m_robotContainer;
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";

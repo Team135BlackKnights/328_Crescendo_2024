@@ -49,6 +49,6 @@ public class DriveCommand extends Command {
     return false;
   }
   // A chooser for autonomous commands
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
+  // SendableChooser<Command> m_chooser = new SendableChooser<>(); not sure why this is in drivecommand but ok
   
 }
