@@ -5,12 +5,12 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.Autos.AutoCommands.Drive;
 import frc.robot.subsystems.MecanumSub;
 
-public class Auto extends SequentialCommandGroup {
-   public Auto(MecanumSub drive) {
+public class Pause extends SequentialCommandGroup {
+   public Pause(MecanumSub drive) {
         super(
             Commands.sequence(
             
-                new Drive(drive, 1, 0.5)
+                new Drive(drive, 1, 0)
   
             )
         );
