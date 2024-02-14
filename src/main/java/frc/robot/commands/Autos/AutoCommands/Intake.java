@@ -12,6 +12,7 @@ double autoSpeed;
 boolean isFinished;
     public final MecanumSub drive;
     Timer timeElapsed= new Timer();
+    public Object liftEncoder;
     public Intake(MecanumSub subsystem, double desiredTime, double MotorSpeed ){
         seconds = desiredTime;
         //when using the word "seconds" you are really refering to the desired time
@@ -51,5 +52,13 @@ boolean isFinished;
     @Override
     public boolean isFinished() {
         return isFinished;
+    }
+    public void resetEncoders() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'resetEncoders'");
+    }
+    public void moveLiftUp(double autoSpeed2) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'moveLiftUp'");
     }
 }
