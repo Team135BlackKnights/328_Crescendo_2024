@@ -13,12 +13,18 @@ public class StrafeCommand extends Command{
     private final double headingCorrectionGain; // For gyro 
     private final PIDController pidController;
     boolean isFinished = false;
+    private final double flip;
     private double initialHeading; 
-    Timer timer = new Timer();
+Timer timer = new Timer();
 
     public StrafeCommand(DriveSubsystem driveSubsystem, double targetDistance) {
         this.driveSubsystem = driveSubsystem;
-        this.targetDistance = targetDistance;
+        if (targetDistance < 0){
+            this.flip = -1;
+        }else{
+            this.flip = 1;
+        }
+        this.targetDistance = Math.abs(targetDistance);
         pidController = new PIDController(Constants.AutoConstants.kPStrafe, Constants.AutoConstants.kIStrafe, Constants.AutoConstants.kDStrafe);
         this.headingCorrectionGain = 0.03; // Adjust for gyro correction
 
@@ -41,15 +47,15 @@ public class StrafeCommand extends Command{
         double turnAdjustment = headingError * headingCorrectionGain;
 
         if (distanceTraveled < targetDistance) {
-            driveSubsystem.driveCartesian(0, pidController.calculate(distanceTraveled,targetDistance), turnAdjustment); 
+            driveSubsystem.driveCartesian(0, flip*pidController.calculate(distanceTraveled,targetDistance), turnAdjustment); 
         } else{
             isFinished = true;
         }
-        if (timer.get() >= 5.0) {
+        if (timer.get() >= 2.0) {
             isFinished = true;
+            timer.reset();
         }
         SmartDashboard.putNumber("Strafe Distance:", distanceTraveled);
-        SmartDashboard.putNumber("TIMER 2", timer.get());
     }
 
     @Override

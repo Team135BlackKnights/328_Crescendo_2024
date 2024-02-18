@@ -11,12 +11,19 @@ public class ForwardCommand extends Command{
     private final DriveSubsystem driveSubsystem;
     private final double distance;
     private final PIDController pidController;
+    private final double flip;
     boolean isFinished = false;
     Timer timer = new Timer();
 
     public ForwardCommand(DriveSubsystem subsystem, double distance) {
             this.driveSubsystem = subsystem;
-            this.distance = distance;
+            if (distance < 0){
+                this.flip = -1;
+            }else{
+                this.flip = 1;
+            }
+            this.distance = Math.abs(distance);
+            
             pidController = new PIDController(Constants.AutoConstants.kPForward, Constants.AutoConstants.kIForward, Constants.AutoConstants.kDForward);
             addRequirements(subsystem);
     }
@@ -32,12 +39,13 @@ public class ForwardCommand extends Command{
     double distanceTraveled = driveSubsystem.calculateDistance(); 
 
     if (distanceTraveled < distance) {
-      driveSubsystem.driveCartesian(pidController.calculate(distanceTraveled,distance), 0, 0); // Drive forward
+      driveSubsystem.driveCartesian(flip*pidController.calculate(distanceTraveled,distance), 0, 0); // Drive forward
     }  else{
         isFinished = true;
     }
-    if (timer.get() >= 5.0) {
+    if (timer.get() >= 2.0) {
         isFinished = true;
+        timer.reset();
     }
             SmartDashboard.putNumber("Forward Distance:", distanceTraveled);
             SmartDashboard.putNumber("TIMER 1", timer.get());

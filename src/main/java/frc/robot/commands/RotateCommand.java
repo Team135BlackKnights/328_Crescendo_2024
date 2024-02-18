@@ -39,7 +39,7 @@ public class RotateCommand extends Command{
         if (Math.abs(targetAngle - (driveSubsystem.getYaw() - initialHeading)) <= angleTolerance){
             isFinished = true;
         }
-        if (timer.get() >= 5.0) {
+        if (timer.get() >= 2.0) {
             isFinished = true;
         }
         double rotationOutput = pidController.calculate(currentHeading, targetAngle);
@@ -57,6 +57,8 @@ public class RotateCommand extends Command{
     public void end(boolean interrupted) {
         driveSubsystem.driveCartesian(0, 0, 0); 
         timer.stop();
+        timer.reset();
+
 
     }
 

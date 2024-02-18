@@ -37,10 +37,35 @@ public class RobotContainer {
         // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
       }
       private void configureAutoChooser() {
-        autoChooser.setDefaultOption("Forward 1 Meter", new SequentialCommandGroup(
-            new ForwardCommand(driveSubsystem, 1.0),
-            new StrafeCommand(driveSubsystem, .4318), // 17 inches
-            new RotateCommand(driveSubsystem, 90)
+        autoChooser.setDefaultOption("RED Alone Driver Station Auto (2 amp scores)", new SequentialCommandGroup(
+            new ForwardCommand(driveSubsystem, 1.5),
+            new RotateCommand(driveSubsystem, 180),
+            new StrafeCommand(driveSubsystem, -.4318), // 17 inches, may need to be flipped
+            //new shoot command,
+            //new arm down command,
+            new ForwardCommand(driveSubsystem, -1),
+            //new intake and move .4318 meters command,
+            new ForwardCommand(driveSubsystem, 1),
+            //new arm up command,
+            new StrafeCommand(driveSubsystem, -.4318), // 17 inches
+            //new shoot command,
+            new ForwardCommand(driveSubsystem,-2),
+            new RotateCommand(driveSubsystem, 180)
+            //2 scores in amp, and ready to get next.
+            ));
+        autoChooser.setDefaultOption("BLUE Alone Driver Station Auto (2 amp scores)", new SequentialCommandGroup(
+            new ForwardCommand(driveSubsystem, 1.5),
+            new StrafeCommand(driveSubsystem, -.4318), // 17 inches
+            //new shoot command,
+            //new arm down command,
+            new ForwardCommand(driveSubsystem, 1),
+            //new intake and move .4318 meters command,
+            new ForwardCommand(driveSubsystem, -1),
+            //new arm up command,
+            new StrafeCommand(driveSubsystem, -.4318), // 17 inches
+            //new shoot command,
+            new ForwardCommand(driveSubsystem,2)
+            //2 scores in amp, and ready to get next.
             ));
         autoChooser.addOption("Empty Auto", new SequentialCommandGroup()); // No-op auto
     
