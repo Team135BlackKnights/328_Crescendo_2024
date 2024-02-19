@@ -22,29 +22,15 @@ public class LiftIntakeC extends Command {
     @Override
 
     public void execute() {
-        /*
-    if(RobotContainer.m_driverController.getXButton() == true) {// when the x button is pressed it squeezes the game object
-        liftIntakeS.squeezeMotor.set(0.05);
-    } else if (RobotContainer.m_driverController.getYButton() == true) {// when the buton y is pressed it releases the game object
-        liftIntakeS.squeezeMotor.set(-0.05);
-    } else {//                                                       when no buttons are pressed it stops
-        liftIntakeS.squeezeMotor.set(0);
-    } 
-
-*/
-
-    if(RobotContainer.m_driverController.getRightBumper() == true) {
-        liftIntakeS.liftIntakeMotor.set(0.05);
-        liftIntakeS.liftIntakeMotor2.set(0.05);
-    } else if (RobotContainer.m_driverController.getLeftBumper() == true) {
-        liftIntakeS.liftIntakeMotor.set(-0.05);
-        liftIntakeS.liftIntakeMotor2.set(-0.05);
-    } else {
-        liftIntakeS.liftIntakeMotor.set(0);
-        liftIntakeS.liftIntakeMotor2.set(0);
+        
+        if(RobotContainer.m_driverController.getRightY() >= 0.02) {
+            liftIntakeS.spinLiftIntake(RobotContainer.m_driverController.getRightY());
+        } else if (RobotContainer.m_driverController.getRightY() <= -0.02) {
+            liftIntakeS.spinLiftIntake(RobotContainer.m_driverController.getRightY());
+        } else {
+            liftIntakeS.spinLiftIntake(0);
+        }
     }
-
-}
 
 
     @Override

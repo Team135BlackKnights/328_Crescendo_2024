@@ -6,7 +6,6 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.motorcontrol.PWMMotorController;
 //API is like a book. we IMPORT "chapters" of this book, to then use their knowledge.
 //Imagine our .command.CommandBase saying "we're in this chapter! use this data."
  //we are a commandbase, using methods
@@ -25,6 +24,8 @@ public class LiftIntakeS extends SubsystemBase { //create a subsystem
       liftIntakeMotor.setIdleMode(IdleMode.kBrake);
       liftIntakeMotor2.enableVoltageCompensation(12);
       liftIntakeMotor2.setIdleMode(IdleMode.kBrake);
+      liftIntakeEncoder.setPositionConversionFactor(1/Constants.TeleConstants.liftConversionFactor);
+      liftIntakeEncoder2.setPositionConversionFactor(1/Constants.TeleConstants.liftConversionFactor);
     }
 
     public void spinLiftIntake(double speed) {
@@ -35,9 +36,10 @@ public class LiftIntakeS extends SubsystemBase { //create a subsystem
     public void stopLiftIntake(){
       liftIntakeMotor.set(0);
       liftIntakeMotor2.set(0);
-
      }
-
+    public double getLiftIntakeEncoderAverage(){
+      return (liftIntakeEncoder.getPosition() + liftIntakeEncoder2.getPosition()) / 2;
+    }
     public void resetEncoders() {
       //Sets position of the encoder
            liftIntakeEncoder.setPosition(0);

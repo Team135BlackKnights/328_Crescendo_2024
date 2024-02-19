@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.Autos.AutoCommands;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.Timer;
@@ -29,7 +29,7 @@ public class RotateCommand extends Command{
         initialHeading = driveSubsystem.getYaw(); 
         isFinished = false;
         timer.start();
-
+        SmartDashboard.putString("Current Action", getName());
     }
 
     @Override

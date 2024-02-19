@@ -6,10 +6,11 @@ public class Constants {
     public static final int BACK_RIGHT_MOTOR = 13;
     public static final int BACK_LEFT_MOTOR = 11;
     public static final int Lift_ID = 30;
-    public static final int Lift2_ID = 31;
+    public static final int Lift_ID2 = 31;
     public static final int Intake_ID = 20;
-    public static final int Intake2_ID = 21;
+    public static final int Intake_ID2 = 21;
     public static final int DRIVER_CONTROLLER = 0;
+    public static final int OPERATOR_CONTROLLER = 1;
     public static class DriveConstants{
         public static final double DEADBAND = 0.1;}   
     public static class AutoConstants{
@@ -27,4 +28,7 @@ public class Constants {
         public static final double kIStrafe = 0;
         public static final double kDStrafe = 0;
     }   
+    public static class TeleConstants{
+        public static final double liftConversionFactor = 14112;
+    }
 }

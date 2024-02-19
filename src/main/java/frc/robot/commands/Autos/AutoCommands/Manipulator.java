@@ -1,24 +1,23 @@
 package frc.robot.commands.Autos.AutoCommands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.LiftIntakeS;
-import com.revrobotics.CANSparkBase.IdleMode;
 
 public class Manipulator extends Command {
-double autoSpeed;
-boolean move;
+boolean m_goDown;
 boolean isFinished;
 
     public final LiftIntakeS lift;
     
-    public Manipulator(LiftIntakeS liftS,LiftIntakeS subsystem, double MotorSpeed ){
+    public Manipulator(LiftIntakeS liftS,boolean goDown){
         //when refering to desired time you can also say "seconds"
         //when saying intake you are refering to the subsystem intakeS
         lift = liftS;
+        m_goDown = goDown;
         //when saying the word lift you are refering  to the subsystem liftS
-        autoSpeed = MotorSpeed;
         //when saying the word "autoSpeed" you are refering to the motor Speed
-        addRequirements(subsystem);
+        addRequirements(liftS);
         
     }
     @Override
@@ -26,39 +25,25 @@ boolean isFinished;
 
     public void initialize(){
     lift.resetEncoders();
-    //resets the encoders so that they can be ready when the match starts
-    //starts a timer
-    if(autoSpeed<0){
-        move=true;
-        //if the motor speed is less than 0 the manipulator will stay up
-    }else{
-        move=false;
-        //if the motor speed is more than 0 the manipulator will be down
-    }
     isFinished = false;    
+        SmartDashboard.putString("Current Action", getName());
+
     }
     @Override
     public void execute() {
-        if (move==true){
-            while (LiftIntakeS.liftIntakeEncoder.getPosition()<0) { 
-            
-                lift.spinLiftIntake(autoSpeed);
-                 
-             }
-        }else{
-            while (LiftIntakeS.liftIntakeEncoder.getPosition()<27) { 
-            
-                lift.spinLiftIntake(-autoSpeed);
-                 
-             }
+        if(m_goDown){
+            if(Math.abs(lift.getLiftIntakeEncoderAverage()) < .1){ //will need to be changed, but I aint risking the motors eating themselves.
+                lift.spinLiftIntake(0.25);
+            }else{
+                isFinished = true;
+            }
+        } else {if(Math.abs(lift.getLiftIntakeEncoderAverage()) < .1){ //will need to be changed, but I aint risking the motors eating themselves.
+                lift.spinLiftIntake(-0.25);
+            }else{
+                isFinished = true;
+            }
         }
-        
-        LiftIntakeS.liftIntakeMotor.setIdleMode(IdleMode.kCoast);
-        LiftIntakeS.liftIntakeMotor2.setIdleMode(IdleMode.kCoast);
-         isFinished = true;
-         
-        
-        
+       // LiftIntakeS.liftIntakeMotor2.setIdleMode(IdleMode.kCoast);
     }
     @Override
     public void end(boolean interrupted) {

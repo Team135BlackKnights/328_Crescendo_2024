@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.Autos.AutoCommands;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.Timer;
@@ -6,24 +6,30 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.LiftIntakeS;
 
 public class ForwardCommand extends Command{
     private final DriveSubsystem driveSubsystem;
+    private final LiftIntakeS lift;
     private final double distance;
     private final PIDController pidController;
     private final double flip;
+    private final boolean m_goDown;
     boolean isFinished = false;
+    boolean isFinishedDriving = false;
+    boolean isFinishedMovingLift = false;
     Timer timer = new Timer();
 
-    public ForwardCommand(DriveSubsystem subsystem, double distance) {
+    public ForwardCommand(DriveSubsystem subsystem, double distance, LiftIntakeS liftS,boolean goDown,boolean ignoreManip) {
             this.driveSubsystem = subsystem;
+            this.lift = liftS;
             if (distance < 0){
                 this.flip = -1;
             }else{
                 this.flip = 1;
             }
+            m_goDown = goDown;
             this.distance = Math.abs(distance);
-            
             pidController = new PIDController(Constants.AutoConstants.kPForward, Constants.AutoConstants.kIForward, Constants.AutoConstants.kDForward);
             addRequirements(subsystem);
     }
@@ -33,15 +39,33 @@ public class ForwardCommand extends Command{
         driveSubsystem.resetEncoders(); // (Assuming you have a reset method in DriveSubsystem)
         isFinished = false;
         timer.start();
+        SmartDashboard.putString("Current Action", getName());
     }
     @Override
   public void execute() {
     double distanceTraveled = driveSubsystem.calculateDistance(); 
 
     if (distanceTraveled < distance) {
+      
       driveSubsystem.driveCartesian(flip*pidController.calculate(distanceTraveled,distance), 0, 0); // Drive forward
-    }  else{
-        isFinished = true;
+    }else{
+      isFinishedDriving = true;
+    }
+    if(m_goDown){
+      if(Math.abs(lift.getLiftIntakeEncoderAverage()) < .1){ //will need to be changed, but I aint risking the motors eating themselves.
+          lift.spinLiftIntake(0.35);
+      } else {
+          isFinishedMovingLift = true;
+      }
+    } else {
+      if(Math.abs(lift.getLiftIntakeEncoderAverage()) < .1){ //will need to be changed, but I aint risking the motors eating themselves.
+          lift.spinLiftIntake(-0.35);
+      }else{
+          isFinishedMovingLift = true;
+      }
+    }
+    if(isFinishedDriving && isFinishedMovingLift){
+      isFinished = true;
     }
     if (timer.get() >= 2.0) {
         isFinished = true;
