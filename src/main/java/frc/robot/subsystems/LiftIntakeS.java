@@ -37,11 +37,7 @@ public class LiftIntakeS extends SubsystemBase { //create a subsystem
       liftIntakeMotor.set(0);
       liftIntakeMotor2.set(0);
      }
-<<<<<<< Updated upstream
     public double getLiftIntakeEncoderAverage(){
-=======
- public double getLiftIntakeEncoderAverage(){
->>>>>>> Stashed changes
       return (liftIntakeEncoder.getPosition() + liftIntakeEncoder2.getPosition()) / 2;
     }
     public void resetEncoders() {

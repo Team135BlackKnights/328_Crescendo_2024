@@ -3,11 +3,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.MecanumSub;
 
 public class DriveCommand extends Command{
-    private final DriveSubsystem driveSubsystem;
-    public DriveCommand(DriveSubsystem driveSubsystem) {
+    private final MecanumSub driveSubsystem;
+    public DriveCommand(MecanumSub driveSubsystem) {
         this.driveSubsystem = driveSubsystem;
         addRequirements(driveSubsystem);
     }
@@ -32,12 +32,12 @@ public class DriveCommand extends Command{
    turningSpeed = Math.abs(turningSpeed) > Constants.DriveConstants.DEADBAND ? turningSpeed : 0.1;
        // m_subsystem.drive.driveCartesian(RobotContainer.m_driverController.getLeftY(), RobotContainer.m_driverController.getRightX(), RobotContainer.m_driverController.getLeftX());
 
-        driveSubsystem.driveCartesian(xSpeed, ySpeed, turningSpeed); // Drive forward
+        driveSubsystem.drive.driveCartesian(xSpeed, ySpeed, turningSpeed); // Drive forward
     
     }
     @Override
     public void end(boolean interrupted) {
-        driveSubsystem.driveCartesian(0, 0, 0); // Stop the robot
+        driveSubsystem.drive.driveCartesian(0, 0, 0); // Stop the robot
     }
     @Override
     public boolean isFinished() {

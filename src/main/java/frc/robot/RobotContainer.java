@@ -2,20 +2,20 @@ package frc.robot;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeC;
 import frc.robot.commands.LiftIntakeC;
-import frc.robot.commands.Autos.AutoCommands.ForwardCommand;
-import frc.robot.commands.Autos.AutoCommands.RotateCommand;
-import frc.robot.commands.Autos.AutoCommands.ShootCommand;
-import frc.robot.commands.Autos.AutoCommands.StrafeCommand;
-import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.commands.Autos.ForwardCommand;
+import frc.robot.commands.Autos.RotateCommand;
+import frc.robot.commands.Autos.ShootCommand;
+import frc.robot.commands.Autos.StrafeCommand;
 import frc.robot.subsystems.IntakeS;
 import frc.robot.subsystems.LiftIntakeS;
+import frc.robot.subsystems.MecanumSub;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 public class RobotContainer {
   private final SendableChooser<SequentialCommandGroup> autoChooser = new SendableChooser<>();
-  private final DriveSubsystem driveSubsystem = new DriveSubsystem();
+  private final MecanumSub driveSubsystem = new MecanumSub();
   private final IntakeS intakeS = new IntakeS();
   private final LiftIntakeS liftIntakeS = new LiftIntakeS();
 
