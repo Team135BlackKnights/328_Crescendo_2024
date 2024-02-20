@@ -33,16 +33,20 @@ public class LiftIntakeC extends Command {
 
 */
 
-    if(RobotContainer.m_driverController.getRightBumper() == true) {
-        liftIntakeS.liftIntakeMotor.set(0.05);
-        liftIntakeS.liftIntakeMotor2.set(0.05);
-    } else if (RobotContainer.m_driverController.getLeftBumper() == true) {
-        liftIntakeS.liftIntakeMotor.set(-0.05);
-        liftIntakeS.liftIntakeMotor2.set(-0.05);
-    } else {
-        liftIntakeS.liftIntakeMotor.set(0);
-        liftIntakeS.liftIntakeMotor2.set(0);
-    }
+if(RobotContainer.m_operatorController.getRightY() >= 0.02) {
+    liftIntakeS.spinLiftIntake(RobotContainer.m_operatorController.getRightY());
+} else if (RobotContainer.m_operatorController.getRightY() <= -0.02) {
+    liftIntakeS.spinLiftIntake(RobotContainer.m_operatorController.getRightY());
+} else {
+    liftIntakeS.spinLiftIntake(0);
+}
+/*if(RobotContainer.m_driverController.getPOV() == 0) {
+    liftIntakeS.spinLiftIntake(-.25);
+} else if (RobotContainer.m_driverController.getPOV() == 180) {
+    liftIntakeS.spinLiftIntake(.25);
+} else {
+    liftIntakeS.spinLiftIntake(0);
+}*/
 
 }
 

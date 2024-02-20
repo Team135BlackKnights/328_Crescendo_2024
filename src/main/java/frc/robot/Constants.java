@@ -17,8 +17,10 @@ public final class Constants {
     public static final int FRONT_RIGHT_MOTOR = 11;
     public static final int BACK_RIGHT_MOTOR = 10;
     public static final int BACK_LEFT_MOTOR = 12;
+    public static final double DEADBAND = 0.1;
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
+    public static final int kOperatorController = 1;
 
     public static final double ksVolts = 0.22;
     public static final double kvVoltSecondsPerMeter = 1.98;
@@ -40,6 +42,7 @@ public final class Constants {
   public static final int Lift_ID = 30;
   public static final int Lift_ID2 = 31;
   public static int intakeMotorID = 20;
+  public static int intakeMotorID2 = 21;
 
 
 //placeholder values for autos

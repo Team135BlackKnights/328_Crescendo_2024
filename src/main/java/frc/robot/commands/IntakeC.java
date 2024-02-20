@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IntakeS;
@@ -45,15 +46,28 @@ public class IntakeC extends Command {
 
 */
 
-    if(RobotContainer.m_driverController.getRightTriggerAxis() >= 0.1) {
-        intakeS.intakeMotor.set(RobotContainer.m_driverController.getRightTriggerAxis());
-    } else if (RobotContainer.m_driverController.getLeftTriggerAxis() >= 0.1) {
-        intakeS.intakeMotor.set(-RobotContainer.m_driverController.getLeftTriggerAxis());
-    } else {
-        intakeS.intakeMotor.set(0);
-    }
+if(RobotContainer.m_operatorController.getRightTriggerAxis() >= 0.1 || RobotContainer.m_driverController.getLeftY() >= 0.1) {
+    double value = RobotContainer.m_operatorController.getRightTriggerAxis() + RobotContainer.m_driverController.getRightTriggerAxis();
+    intakeS.spinIntake(value);
+} else if (RobotContainer.m_operatorController.getLeftTriggerAxis() >= 0.1) {
+        double value = -RobotContainer.m_operatorController.getLeftTriggerAxis() + -RobotContainer.m_driverController.getLeftTriggerAxis();
 
+    intakeS.spinIntake(value);
+} else {
+    intakeS.spinIntake(0);
 }
+//outtake
+if(RobotContainer.m_operatorController.getLeftY() >= 0.1 || RobotContainer.m_driverController.getLeftY() >= 0.1) {
+        double value = RobotContainer.m_operatorController.getLeftY() + RobotContainer.m_driverController.getLeftY();
+
+    intakeS.spinOuttake(value);
+} else if (RobotContainer.m_operatorController.getLeftY() <= -0.1 || RobotContainer.m_driverController.getLeftY() <= -0.1) {
+            double value = RobotContainer.m_operatorController.getLeftY() + RobotContainer.m_driverController.getLeftY();
+    intakeS.spinOuttake(value);
+} else {
+    intakeS.spinOuttake(0);
+}
+    }
 
 
     @Override

@@ -14,15 +14,22 @@ import frc.robot.Constants;
 public class IntakeS extends SubsystemBase { //create a subsystem
 
     public static CANSparkMax intakeMotor = new CANSparkMax(Constants.intakeMotorID,MotorType.kBrushless);
+    public static CANSparkMax intakeMotor2 = new CANSparkMax(Constants.intakeMotorID2,MotorType.kBrushless);
     public static RelativeEncoder intakeEncoder = intakeMotor.getEncoder();
+    public static RelativeEncoder intakeEncoder2 = intakeMotor2.getEncoder();
 
     public IntakeS(){
       intakeMotor.enableVoltageCompensation(12);
       intakeMotor.setIdleMode(IdleMode.kBrake);
+      intakeMotor2.enableVoltageCompensation(12);
+      intakeMotor2.setIdleMode(IdleMode.kCoast);
     }
 
     public void spinIntake(double speed) {
     intakeMotor.set(speed);
+    }
+    public void spinOuttake(double speed) {
+    intakeMotor2.set(speed);
     }
 
 
@@ -30,7 +37,6 @@ public class IntakeS extends SubsystemBase { //create a subsystem
     public static void resetEncoders() {
       //Sets position of the encoder
            intakeEncoder.setPosition(0);
+            intakeEncoder2.setPosition(0);
       }
-
-
-  }
+    }

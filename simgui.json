@@ -1,0 +1,31 @@
+{
+  "HALProvider": {
+    "Other Devices": {
+      "Talon FX (v6)[13]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon FX (v6)[13]/Fwd Limit": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon FX (v6)[13]/Rotor Sensor": {
+        "header": {
+          "open": true
+        }
+      }
+    }
+  },
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/SmartDashboard/Auto choices": "String Chooser",
+      "/SmartDashboard/SendableChooser[1]": "String Chooser"
+    }
+  },
+  "NetworkTables Info": {
+    "visible": true
+  }
+}

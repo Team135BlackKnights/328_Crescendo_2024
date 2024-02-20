@@ -7,6 +7,7 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeC;
+import frc.robot.commands.LiftIntakeC;
 import frc.robot.commands.Autos.Auto;
 import frc.robot.commands.Autos.AutoCommands.Drive;
 import frc.robot.subsystems.MecanumSub;
@@ -24,11 +25,14 @@ import frc.robot.subsystems.IntakeS;
  * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
  * subsystems, commands, and trigger mappings) should be declared here.
  */
+import frc.robot.subsystems.LiftIntakeS;
 public class RobotContainer {
   public static final String controller2 = null;
     public static MecanumSub _driveSub = new MecanumSub();
     DriveCommand _DriveCommand = new DriveCommand(_driveSub);
     IntakeS intakeS = new IntakeS();
+    LiftIntakeS liftIntakeS = new LiftIntakeS();
+    LiftIntakeC liftC = new LiftIntakeC(liftIntakeS);
     IntakeC intakeC = new IntakeC(intakeS);
 // The robot's subsystems and commands are defined here...
   public static Auto driveout = new Auto(_driveSub);
@@ -36,7 +40,8 @@ public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
   public final static XboxController m_driverController =
       new XboxController(OperatorConstants.kDriverControllerPort);
-
+public final static XboxController m_operatorController =
+      new XboxController(OperatorConstants.kOperatorController);
       SendableChooser<Command> m_Chooser = new SendableChooser<>();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -45,6 +50,7 @@ public class RobotContainer {
     configureBindings();
 
     intakeS.setDefaultCommand(intakeC);
+    liftIntakeS.setDefaultCommand(liftC);
     _driveSub.setDefaultCommand(_DriveCommand);
  
     m_Chooser.setDefaultOption("Drive out", driveout);
