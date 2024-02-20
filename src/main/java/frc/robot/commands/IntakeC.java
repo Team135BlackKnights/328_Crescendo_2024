@@ -22,18 +22,18 @@ public class IntakeC extends Command {
     @Override
     public void execute() {
 
-    if(RobotContainer.m_driverController.getRightTriggerAxis() >= 0.1) {
-        intakeS.spinIntake(RobotContainer.m_driverController.getRightTriggerAxis());
-    } else if (RobotContainer.m_driverController.getLeftTriggerAxis() >= 0.1) {
-        intakeS.spinIntake(-RobotContainer.m_driverController.getLeftTriggerAxis());
+    if(RobotContainer.m_operatorController.getRightTriggerAxis() >= 0.1) {
+        intakeS.spinIntake(RobotContainer.m_operatorController.getRightTriggerAxis());
+    } else if (RobotContainer.m_operatorController.getLeftTriggerAxis() >= 0.1) {
+        intakeS.spinIntake(-RobotContainer.m_operatorController.getLeftTriggerAxis());
     } else {
         intakeS.spinIntake(0);
     }
     //outtake
-    if(RobotContainer.m_driverController.getLeftY() >= 0.1) {
-        intakeS.spinOuttake(RobotContainer.m_driverController.getLeftY());
-    } else if (RobotContainer.m_driverController.getLeftY() <= -0.1) {
-        intakeS.spinOuttake(RobotContainer.m_driverController.getLeftY());
+    if(RobotContainer.m_operatorController.getLeftY() >= 0.1) {
+        intakeS.spinOuttake(RobotContainer.m_operatorController.getLeftY());
+    } else if (RobotContainer.m_operatorController.getLeftY() <= -0.1) {
+        intakeS.spinOuttake(RobotContainer.m_operatorController.getLeftY());
     } else {
         intakeS.spinOuttake(0);
     }

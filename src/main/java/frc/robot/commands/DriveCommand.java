@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSubsystem;
 
@@ -18,18 +19,19 @@ public class DriveCommand extends Command{
     @Override
     public void execute() {
         // Use the subsystem to drive the robot
-        double xSpeed = -RobotContainer.m_driverController.getLeftY();
+   double xSpeed = -RobotContainer.m_driverController.getLeftY();
    double ySpeed = RobotContainer.m_driverController.getLeftX();
    double turningSpeed = RobotContainer.m_driverController.getRightX();
 
-   /*xSpeed = Math.pow(xSpeed, 2) * (xSpeed < 0 ? -1 : 1);
+   xSpeed = Math.pow(xSpeed, 2) * (xSpeed < 0 ? -1 : 1);
    ySpeed = Math.pow(ySpeed, 2) * (ySpeed < 0 ? -1 : 1);
    turningSpeed = Math.pow(turningSpeed, 2) * (turningSpeed < 0 ? -1 : 1);
 
    xSpeed = Math.abs(xSpeed) > Constants.DriveConstants.DEADBAND ? xSpeed : 0.1;
    ySpeed = Math.abs(ySpeed) > Constants.DriveConstants.DEADBAND ? ySpeed : 0.1;
    turningSpeed = Math.abs(turningSpeed) > Constants.DriveConstants.DEADBAND ? turningSpeed : 0.1;
-   */
+       // m_subsystem.drive.driveCartesian(RobotContainer.m_driverController.getLeftY(), RobotContainer.m_driverController.getRightX(), RobotContainer.m_driverController.getLeftX());
+
         driveSubsystem.driveCartesian(xSpeed, ySpeed, turningSpeed); // Drive forward
     
     }

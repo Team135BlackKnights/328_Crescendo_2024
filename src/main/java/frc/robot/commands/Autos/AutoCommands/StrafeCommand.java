@@ -47,16 +47,15 @@ Timer timer = new Timer();
 
     @Override
     public void execute() {
-        double distanceTraveled = driveSubsystem.calculateDistance(); // Make sure this factors in sideways movement
+        double[] distanceTraveled = driveSubsystem.calculateDistance(true); // Make sure this factors in sideways movement
         double currentHeading = driveSubsystem.getYaw();
         double headingError = initialHeading - currentHeading;
         double turnAdjustment = headingError * headingCorrectionGain;
-
-        if (distanceTraveled < targetDistance) {
+        if (distanceTraveled[2] < targetDistance) {
             if (shouldIntake){
                 intake.spinIntake(.75);
               }
-            driveSubsystem.driveCartesian(0, flip*pidController.calculate(distanceTraveled,targetDistance), turnAdjustment); 
+            driveSubsystem.driveCartesian(0, flip*pidController.calculate(Math.abs(distanceTraveled[2]),targetDistance), turnAdjustment); 
         } else{
             isFinished = true;
         }
@@ -64,7 +63,7 @@ Timer timer = new Timer();
             isFinished = true;
             timer.reset();
         }
-        SmartDashboard.putNumber("Strafe Distance:", distanceTraveled);
+        SmartDashboard.putNumber("Strafe Distance:", distanceTraveled[2]);
     }
 
     @Override

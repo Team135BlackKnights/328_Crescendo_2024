@@ -43,11 +43,11 @@ public class ForwardCommand extends Command{
     }
     @Override
   public void execute() {
-    double distanceTraveled = driveSubsystem.calculateDistance(); 
+    double[] distanceTraveled = driveSubsystem.calculateDistance(false); 
 
-    if (distanceTraveled < distance) {
+    if (Math.abs(distanceTraveled[0]) < distance) {
       
-      driveSubsystem.driveCartesian(flip*pidController.calculate(distanceTraveled,distance), 0, 0); // Drive forward
+      driveSubsystem.driveCartesian(flip*pidController.calculate(Math.abs(distanceTraveled[0]),distance), 0, 0); // Drive forward
     }else{
       isFinishedDriving = true;
     }
@@ -71,7 +71,7 @@ public class ForwardCommand extends Command{
         isFinished = true;
         timer.reset();
     }
-            SmartDashboard.putNumber("Forward Distance:", distanceTraveled);
+            SmartDashboard.putNumber("Forward Distance:", distanceTraveled[0]);
             SmartDashboard.putNumber("TIMER 1", timer.get());
   }
 
