@@ -24,19 +24,27 @@ public class DriveCommand extends Command {
 
   public DriveCommand(MecanumSub subsystem) {
     m_subsystem = subsystem;
+
     // Use addRequirements() here to declare subsystem dependencies
     addRequirements(subsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    m_subsystem.backLeft.setInverted(true);
+    m_subsystem.backRight.setInverted(false);
+    m_subsystem.frontLeft.setInverted(true);
+    m_subsystem.frontRight.setInverted(false);
+
+    
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   // m_subsystem.drive.driveCartesian(RobotContainer.m_driverController.getLeftY(), RobotContainer.m_driverController.getRightX(), RobotContainer.m_driverController.getLeftX());
-    new ChassisSpeeds(RobotContainer.m_driverController.getLeftX()*Constants.MAX_SPEED_HORIZONTAL_METERS_PER_SECOND, RobotContainer.m_driverController.getLeftY()*Constants.MAX_SPEED_METERS_PER_SECOND, RobotContainer.m_driverController.getRightX()*Constants.MAX_SPEED_ROTATION_METERS_PER_SECOND);
+    m_subsystem.drive.driveCartesian(RobotContainer.m_driverController.getLeftY(), RobotContainer.m_driverController.getLeftX(), RobotContainer.m_driverController.getRightX());
+    //new ChassisSpeeds(RobotContainer.m_driverController.getLeftX()*Constants.MAX_SPEED_HORIZONTAL_METERS_PER_SECOND, RobotContainer.m_driverController.getLeftY()*Constants.MAX_SPEED_METERS_PER_SECOND, RobotContainer.m_driverController.getRightX()*Constants.MAX_SPEED_ROTATION_METERS_PER_SECOND);
   }
 
   // Called once the command ends or is interrupted.
