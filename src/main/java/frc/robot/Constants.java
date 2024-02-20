@@ -17,7 +17,7 @@ public final class Constants {
     public static final int FRONT_RIGHT_MOTOR = 11;
     public static final int BACK_RIGHT_MOTOR = 10;
     public static final int BACK_LEFT_MOTOR = 12;
-    public static final double DEADBAND = 0.1;
+    public static final double DEADBAND = 0.05;
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
     public static final int kOperatorController = 1;

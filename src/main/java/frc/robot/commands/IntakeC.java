@@ -46,10 +46,10 @@ public class IntakeC extends Command {
 
 */
 
-if(RobotContainer.m_operatorController.getRightTriggerAxis() >= 0.1 || RobotContainer.m_driverController.getLeftY() >= 0.1) {
+if(RobotContainer.m_operatorController.getRightTriggerAxis() >= 0.1 || RobotContainer.m_driverController.getRightTriggerAxis() >= 0.1) {
     double value = RobotContainer.m_operatorController.getRightTriggerAxis() + RobotContainer.m_driverController.getRightTriggerAxis();
     intakeS.spinIntake(value);
-} else if (RobotContainer.m_operatorController.getLeftTriggerAxis() >= 0.1) {
+} else if (RobotContainer.m_operatorController.getLeftTriggerAxis() >= 0.1 || RobotContainer.m_driverController.getLeftTriggerAxis() >= 0.1)  {
         double value = -RobotContainer.m_operatorController.getLeftTriggerAxis() + -RobotContainer.m_driverController.getLeftTriggerAxis();
 
     intakeS.spinIntake(value);
@@ -57,12 +57,12 @@ if(RobotContainer.m_operatorController.getRightTriggerAxis() >= 0.1 || RobotCont
     intakeS.spinIntake(0);
 }
 //outtake
-if(RobotContainer.m_operatorController.getLeftY() >= 0.1 || RobotContainer.m_driverController.getLeftY() >= 0.1) {
-        double value = RobotContainer.m_operatorController.getLeftY() + RobotContainer.m_driverController.getLeftY();
+if(RobotContainer.m_operatorController.getLeftY() >= 0.1) {
+        double value = RobotContainer.m_operatorController.getLeftY();
 
     intakeS.spinOuttake(value);
-} else if (RobotContainer.m_operatorController.getLeftY() <= -0.1 || RobotContainer.m_driverController.getLeftY() <= -0.1) {
-            double value = RobotContainer.m_operatorController.getLeftY() + RobotContainer.m_driverController.getLeftY();
+} else if (RobotContainer.m_operatorController.getLeftY() <= -0.1) {
+            double value = RobotContainer.m_operatorController.getLeftY();
     intakeS.spinOuttake(value);
 } else {
     intakeS.spinOuttake(0);

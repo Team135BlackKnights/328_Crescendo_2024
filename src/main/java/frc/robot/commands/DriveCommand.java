@@ -47,14 +47,14 @@ public class DriveCommand extends Command {
    double ySpeed = RobotContainer.m_driverController.getLeftX();
    double turningSpeed = -RobotContainer.m_driverController.getRightX();
 
-  /*  xSpeed = Math.pow(xSpeed, 2) * (xSpeed < 0 ? -1 : 1);
+    xSpeed = Math.pow(xSpeed, 2) * (xSpeed < 0 ? -1 : 1);
    ySpeed = Math.pow(ySpeed, 2) * (ySpeed < 0 ? -1 : 1);
    turningSpeed = Math.pow(turningSpeed, 2) * (turningSpeed < 0 ? -1 : 1);
 
-   xSpeed = Math.abs(xSpeed) > Constants.DEADBAND ? xSpeed : 0.1;
-   ySpeed = Math.abs(ySpeed) > Constants.DEADBAND ? ySpeed : 0.1;
-   turningSpeed = Math.abs(turningSpeed) > Constants.DEADBAND ? turningSpeed : 0.1;
-*/
+   xSpeed = Math.abs(xSpeed) > Constants.DEADBAND ? xSpeed : 0.0;
+   ySpeed = Math.abs(ySpeed) > Constants.DEADBAND ? ySpeed : 0.0;
+   turningSpeed = Math.abs(turningSpeed) > Constants.DEADBAND ? turningSpeed : 0.0;
+
     m_subsystem.drive.driveCartesian(xSpeed, ySpeed, turningSpeed);
     //new ChassisSpeeds(RobotContainer.m_driverController.getLeftX()*Constants.MAX_SPEED_HORIZONTAL_METERS_PER_SECOND, RobotContainer.m_driverController.getLeftY()*Constants.MAX_SPEED_METERS_PER_SECOND, RobotContainer.m_driverController.getRightX()*Constants.MAX_SPEED_ROTATION_METERS_PER_SECOND);
   }

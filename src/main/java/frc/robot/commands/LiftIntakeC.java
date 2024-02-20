@@ -33,10 +33,10 @@ public class LiftIntakeC extends Command {
 
 */
 
-if(RobotContainer.m_operatorController.getRightY() >= 0.02) {
-    liftIntakeS.spinLiftIntake(RobotContainer.m_operatorController.getRightY());
-} else if (RobotContainer.m_operatorController.getRightY() <= -0.02) {
-    liftIntakeS.spinLiftIntake(RobotContainer.m_operatorController.getRightY());
+if(RobotContainer.m_operatorController.getRightY() >= 0.05) {
+    liftIntakeS.spinLiftIntake(RobotContainer.m_operatorController.getRightY()/2);
+} else if (RobotContainer.m_operatorController.getRightY() <= -0.05) {
+    liftIntakeS.spinLiftIntake(RobotContainer.m_operatorController.getRightY()/2);
 } else {
     liftIntakeS.spinLiftIntake(0);
 }
