@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -23,6 +24,7 @@ import edu.wpi.first.math.kinematics.MecanumDriveWheelSpeeds;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import com.kauailabs.navx.frc.AHRS;
 //import com.revrobotics.CANSparkMax;
 //import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkBase.IdleMode;
@@ -49,7 +51,7 @@ import com.revrobotics.CANSparkBase.IdleMode;
   private final Encoder m_backRightEncoder = new Encoder(6,7);
 
 
-private final AnalogGyro m_gyro = new AnalogGyro(0);
+private final AHRS m_gyro = new AHRS(Port.kUSB1);
   // creation of kinematics with utilization of wheel locations
  MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics
     (m_frontRightLocation, m_frontLeftLocation, m_backRightLocation, m_backLeftLocation);
@@ -58,27 +60,11 @@ private final AnalogGyro m_gyro = new AnalogGyro(0);
   Pose2d m_pose = new Pose2d();
 
   // kinematics and odometry
-  MecanumDriveOdometry m_odometry = new MecanumDriveOdometry(
-  m_kinematics,
-  m_gyro.getRotation2d(),
-  new MecanumDriveWheelPositions(
-    m_frontLeftEncoder.getDistance(), m_frontRightEncoder.getDistance(),
-    m_backLeftEncoder.getDistance(), m_backRightEncoder.getDistance()
-  ),
-  new Pose2d(5.0, 13.5, new Rotation2d())
-);
+ 
 
 public void periodic() {
   // Get my wheel positions
-  var wheelPositions = new MecanumDriveWheelPositions(
-    m_frontLeftEncoder.getDistance(), m_frontRightEncoder.getDistance(),
-    m_backLeftEncoder.getDistance(), m_backRightEncoder.getDistance());
-
-  // Get the rotation of the robot from the gyro.
-  var gyroAngle = m_gyro.getRotation2d();
-
-  // Update the pose
-  m_pose = m_odometry.update(gyroAngle, wheelPositions);
+ 
 }
 
     public void runStop() {
@@ -87,6 +73,7 @@ public void periodic() {
         frontRight.setNeutralMode(NeutralModeValue.Brake);
         backLeft.setNeutralMode(NeutralModeValue.Brake);
         backRight.setNeutralMode(NeutralModeValue.Brake); 
+
     }
 
   public MecanumSub() {
@@ -99,7 +86,43 @@ public void periodic() {
     m_speeds = m_kinematics.toWheelSpeeds(speeds);
     //frontLeft.set(0.5);
     }
-
+    public double[] calculateDistance(boolean isStrafe) {
+      if (isStrafe){
+          double averageEncoderCountsFLBR = (frontLeft.getPosition().getValueAsDouble() + backRight.getPosition().getValueAsDouble()) / 2.0;
+          double averageEncoderCountsFRBL = (frontRight.getPosition().getValueAsDouble() + backLeft.getPosition().getValueAsDouble()) / 2.0;
+          double averageEncoderCountsOverall = (Math.abs(averageEncoderCountsFLBR) + Math.abs(averageEncoderCountsFRBL)) / 2.0;
+          // Convert encoder counts to wheel rotations
+          double rotationsFLBR = averageEncoderCountsFLBR / Constants.AutoConstants.ENCODER_COUNTS_PER_REV;
+          double rotationsFRBL = averageEncoderCountsFRBL / Constants.AutoConstants.ENCODER_COUNTS_PER_REV;
+          double rotationsOverall = averageEncoderCountsOverall / Constants.AutoConstants.ENCODER_COUNTS_PER_REV;
+          double[] distanceTraveled = new double[2];
+          distanceTraveled[0] = rotationsFLBR * Constants.AutoConstants.WHEEL_CIRCUMFERENCE;
+          distanceTraveled[1] = rotationsFRBL * Constants.AutoConstants.WHEEL_CIRCUMFERENCE;
+          distanceTraveled[2] = rotationsOverall * Constants.AutoConstants.WHEEL_CIRCUMFERENCE;
+          // Calculate distance traveled
+          return distanceTraveled;
+      }else{
+      double averageEncoderCountsFLBR = (frontLeft.getPosition().getValueAsDouble() + backRight.getPosition().getValueAsDouble()) / 2.0;
+          double averageEncoderCountsFRBL = (frontRight.getPosition().getValueAsDouble() + backLeft.getPosition().getValueAsDouble()) / 2.0;
+          double averageEncoderCountsOverall = (Math.abs(averageEncoderCountsFLBR) + Math.abs(averageEncoderCountsFRBL)) / 2.0;
+  
+      // Convert encoder counts to wheel rotations
+      double rotations = averageEncoderCountsOverall;
+  
+      // Calculate distance traveled
+      double[] distanceTraveled = new double[1];
+      distanceTraveled[0] = rotations * Constants.AutoConstants.WHEEL_CIRCUMFERENCE;
+      return distanceTraveled;}
+      }
+      public double getYaw() {
+        return m_gyro.getYaw();
+      }
+      public void resetEncoders() {
+        frontLeft.setPosition(0);
+        frontRight.setPosition(0);
+        backLeft.setPosition(0);
+        backRight.setPosition(0);
+    }
   public void MecanumDrive(double frontLeft,double backLeft,double frontRight,double backRight) {
       MecanumDrive(frontLeft, backLeft, frontRight, backRight);
   }

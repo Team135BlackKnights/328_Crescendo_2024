@@ -54,16 +54,20 @@ if(RobotContainer.m_operatorController.getRightTriggerAxis() >= 0.1 || RobotCont
 
     intakeS.spinIntake(value);
 } else {
-    intakeS.spinIntake(0);
+    if (!(Math.abs(RobotContainer.m_operatorController.getLeftY()) >= .1)){
+            intakeS.spinIntake(0);
+    }
 }
 //outtake
 if(RobotContainer.m_operatorController.getLeftY() >= 0.1) {
         double value = RobotContainer.m_operatorController.getLeftY();
 
     intakeS.spinOuttake(value);
+    intakeS.spinIntake(-value);
 } else if (RobotContainer.m_operatorController.getLeftY() <= -0.1) {
             double value = RobotContainer.m_operatorController.getLeftY();
     intakeS.spinOuttake(value);
+    intakeS.spinIntake(-value);
 } else {
     intakeS.spinOuttake(0);
 }

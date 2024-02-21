@@ -25,6 +25,9 @@ public class LiftIntakeS extends SubsystemBase { //create a subsystem
       liftIntakeMotor.setIdleMode(IdleMode.kBrake);
       liftIntakeMotor2.enableVoltageCompensation(12);
       liftIntakeMotor2.setIdleMode(IdleMode.kBrake);
+      liftIntakeEncoder.setPositionConversionFactor(1/Constants.TeleConstants.liftConversionFactor);
+      liftIntakeEncoder2.setPositionConversionFactor(1/Constants.TeleConstants.liftConversionFactor);
+    
     }
 
     public void spinLiftIntake(double speed) {
@@ -38,6 +41,9 @@ public class LiftIntakeS extends SubsystemBase { //create a subsystem
 
      }
 
+     public double getLiftIntakeEncoderAverage(){
+      return (liftIntakeEncoder.getPosition() + liftIntakeEncoder2.getPosition()) / 2;
+    }
     public void resetEncoders() {
       //Sets position of the encoder
            liftIntakeEncoder.setPosition(0);

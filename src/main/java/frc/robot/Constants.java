@@ -54,4 +54,22 @@ public final class Constants {
   public static final double MAX_SPEED_HORIZONTAL_METERS_PER_SECOND = 3;
   public static final double MAX_SPEED_ROTATION_METERS_PER_SECOND = 3;
   // encoders 
+  public static class AutoConstants{
+    public static final double kP = 0.02;
+    public static final double WHEEL_CIRCUMFERENCE = 0.1524;
+    public static final double ENCODER_COUNTS_PER_REV = 2048.0;
+    public static final double TARGET_HEADING = 0.0;
+    public static final double kPRotate = 0.25;
+    public static final double kIRotate = 0.0;
+    public static final double kDRotate = 0.0;
+    public static final double kPForward = .03;
+    public static final double kIForward = .015;
+    public static final double kDForward = 0;
+    public static final double kPStrafe = .25;
+    public static final double kIStrafe = 0;
+    public static final double kDStrafe = 0;
+}   
+public static class TeleConstants{
+    public static final double liftConversionFactor = 14112;
+}
 }

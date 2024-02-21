@@ -8,14 +8,14 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeC;
 import frc.robot.commands.LiftIntakeC;
-import frc.robot.commands.Autos.Auto;
-import frc.robot.commands.Autos.AutoCommands.Drive;
+import frc.robot.commands.Autos.*;
 import frc.robot.subsystems.MecanumSub;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.IntakeS;
@@ -27,7 +27,6 @@ import frc.robot.subsystems.IntakeS;
  */
 import frc.robot.subsystems.LiftIntakeS;
 public class RobotContainer {
-  public static final String controller2 = null;
     public static MecanumSub _driveSub = new MecanumSub();
     DriveCommand _DriveCommand = new DriveCommand(_driveSub);
     IntakeS intakeS = new IntakeS();
@@ -35,26 +34,24 @@ public class RobotContainer {
     LiftIntakeC liftC = new LiftIntakeC(liftIntakeS);
     IntakeC intakeC = new IntakeC(intakeS);
 // The robot's subsystems and commands are defined here...
-  public static Auto driveout = new Auto(_driveSub);
+private final SendableChooser<SequentialCommandGroup> autoChooser = new SendableChooser<>();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   public final static XboxController m_driverController =
       new XboxController(OperatorConstants.kDriverControllerPort);
 public final static XboxController m_operatorController =
       new XboxController(OperatorConstants.kOperatorController);
-      SendableChooser<Command> m_Chooser = new SendableChooser<>();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+    configureAutoChooser();
 
     intakeS.setDefaultCommand(intakeC);
     liftIntakeS.setDefaultCommand(liftC);
     _driveSub.setDefaultCommand(_DriveCommand);
  
-    m_Chooser.setDefaultOption("Drive out", driveout);
-    SmartDashboard.putData(m_Chooser);
     // Configure the trigger bindings
     configureBindings();
   
@@ -74,13 +71,44 @@ public final static XboxController m_operatorController =
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
   }
-
+  private void configureAutoChooser() {
+        SmartDashboard.putNumber("PID", Constants.AutoConstants.kPForward);
+        autoChooser.setDefaultOption("RED Alone Driver Station Auto (2 amp scores)", new SequentialCommandGroup(
+            new ForwardCommand(_driveSub, 1.5, liftIntakeS,false,true)
+          /*   new RotateCommand(_driveSub, 180),
+            new StrafeCommand(_driveSub, intakeS,-.4318,false), // 17 inches, may need to be flipped
+            new ShootCommand(intakeS),
+            new ForwardCommand(_driveSub, -1, liftIntakeS,true,false),
+            new StrafeCommand(_driveSub, intakeS,.4318,true), // 17 inches, may need to be flipped
+            new ForwardCommand(_driveSub, 1, liftIntakeS,false,false),
+            new StrafeCommand(_driveSub, intakeS,-.4318,false), // 17 inches
+            new ShootCommand(intakeS),
+            new ForwardCommand(_driveSub,-2, liftIntakeS,true,false),
+            new RotateCommand(_driveSub, 180)
+            *///2 scores in amp, and ready to get next.
+            ));
+        autoChooser.setDefaultOption("BLUE Alone Driver Station Auto (2 amp scores)", new SequentialCommandGroup(
+            new ForwardCommand(_driveSub, 1.5,liftIntakeS,false,true),
+            new StrafeCommand(_driveSub, intakeS,-.4318,false), // 17 inches
+            new ShootCommand(intakeS),
+            new ForwardCommand(_driveSub, 1,liftIntakeS,true,false),
+            new StrafeCommand(_driveSub, intakeS,.4318,true), // 17 inches, may need to be flipped
+            new ForwardCommand(_driveSub, -1,liftIntakeS,false,false),
+            new StrafeCommand(_driveSub, intakeS,-.4318,false), // 17 inches
+            new ShootCommand(intakeS),
+            new ForwardCommand(_driveSub,2,liftIntakeS,true,true)
+            //2 scores in amp, and ready to get next.
+            ));
+        autoChooser.addOption("Empty Auto", new SequentialCommandGroup()); // No-op auto
+    
+        SmartDashboard.putData("Auto Selector", autoChooser);
+      }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-    return m_Chooser.getSelected();  }
+  public SequentialCommandGroup getAutonomousCommand() {
+    return autoChooser.getSelected();  }
 }
 // robot container
