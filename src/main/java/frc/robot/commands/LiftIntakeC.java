@@ -40,6 +40,17 @@ if(RobotContainer.m_operatorController.getRightY() >= 0.05) {
 } else {
     liftIntakeS.spinLiftIntake(0);
 }
+
+// Assuming you want to stop when the position is within a range of 4.5 to 5.5
+if (LiftIntakeS.liftIntakeEncoder2.getPosition() < 0 || LiftIntakeS.liftIntakeEncoder2.getPosition() > 5) {
+    liftIntakeS.stopLiftIntake();
+}
+
+// Adjust the conditions for the other encoder as well
+if (LiftIntakeS.liftIntakeEncoder.getPosition() < 0 || LiftIntakeS.liftIntakeEncoder.getPosition() > 5) {
+    liftIntakeS.stopLiftIntake();
+}
+
 /*if(RobotContainer.m_driverController.getPOV() == 0) {
     liftIntakeS.spinLiftIntake(-.25);
 } else if (RobotContainer.m_driverController.getPOV() == 180) {
