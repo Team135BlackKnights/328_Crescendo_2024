@@ -44,7 +44,8 @@ public final class Constants {
   public static int intakeMotorID = 20;
   public static int intakeMotorID2 = 21;
 
-
+    public static final int Hang_ID = 40;
+  public static final int Hang_ID2 = 41;
 //placeholder values for autos
   public static int kAutoDriveSpeed = 3;
   public static int kAutoDriveDistanceInches = 3;
