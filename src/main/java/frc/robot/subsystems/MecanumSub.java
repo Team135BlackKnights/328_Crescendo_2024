@@ -25,18 +25,18 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.kauailabs.navx.frc.AHRS;
-//import com.revrobotics.CANSparkMax;
-//import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkBase.IdleMode;
 
 
 
   //its the motors gang
   public class MecanumSub extends SubsystemBase {
-  public TalonFX frontLeft = new TalonFX(Constants.FRONT_LEFT_MOTOR);
-  public TalonFX frontRight = new TalonFX(Constants.FRONT_RIGHT_MOTOR);
-  public TalonFX backRight = new TalonFX(Constants.BACK_RIGHT_MOTOR);
-  public TalonFX backLeft = new TalonFX(Constants.BACK_LEFT_MOTOR); 
+  public CANSparkMax frontLeft = new CANSparkMax(Constants.FRONT_LEFT_MOTOR, MotorType.kBrushless);
+  public CANSparkMax frontRight = new CANSparkMax(Constants.FRONT_RIGHT_MOTOR, MotorType.kBrushless);
+  public CANSparkMax backRight = new CANSparkMax(Constants.BACK_RIGHT_MOTOR, MotorType.kBrushless);
+  public CANSparkMax backLeft = new CANSparkMax(Constants.BACK_LEFT_MOTOR, MotorType.kBrushless); 
 
   public MecanumDrive drive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
   
