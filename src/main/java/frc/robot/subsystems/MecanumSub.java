@@ -45,11 +45,6 @@ import com.revrobotics.CANSparkBase.IdleMode;
   Translation2d m_backLeftLocation = new Translation2d(-Units.inchesToMeters(19.1), Units.inchesToMeters(19.1));
   Translation2d m_backRightLocation = new Translation2d(-Units.inchesToMeters(19.1), -Units.inchesToMeters(19.1));
 
-  private final Encoder m_frontLeftEncoder = new Encoder(0,1);
-  private final Encoder m_frontRightEncoder = new Encoder(2,3);
-  private final Encoder m_backLeftEncoder = new Encoder(4,5);
-  private final Encoder m_backRightEncoder = new Encoder(6,7);
-
 
 private final AHRS m_gyro = new AHRS(Port.kUSB1);
   // creation of kinematics with utilization of wheel locations

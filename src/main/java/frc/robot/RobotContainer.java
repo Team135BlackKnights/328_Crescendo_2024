@@ -74,7 +74,7 @@ public final static XboxController m_operatorController =
   private void configureAutoChooser() {
         SmartDashboard.putNumber("PID", Constants.AutoConstants.kPForward);
         autoChooser.setDefaultOption("RED Alone Driver Station Auto (2 amp scores)", new SequentialCommandGroup(
-            new ForwardCommand(_driveSub, 1.5, liftIntakeS,false,true)
+            new ForwardCommand(_driveSub, 8, liftIntakeS,false,true)
           /*   new RotateCommand(_driveSub, 180),
             new StrafeCommand(_driveSub, intakeS,-.4318,false), // 17 inches, may need to be flipped
             new ShootCommand(intakeS),
