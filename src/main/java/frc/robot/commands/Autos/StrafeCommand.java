@@ -47,8 +47,8 @@ Timer timer = new Timer();
 
     @Override
     public void execute() {
-        double[] distanceTraveled = driveSubsystem.calculateDistance(true); // Make sure this factors in sideways movement
-        double currentHeading = driveSubsystem.getYaw();
+         double[] distanceTraveled = driveSubsystem.calculateDistance(true); // Make sure this factors in sideways movement
+   double currentHeading = driveSubsystem.getYaw();
         double headingError = initialHeading - currentHeading;
         double turnAdjustment = headingError * headingCorrectionGain;
         if (distanceTraveled[2] < targetDistance) {
@@ -64,6 +64,7 @@ Timer timer = new Timer();
             timer.reset();
         }
         SmartDashboard.putNumber("Strafe Distance:", distanceTraveled[2]);
+        
     }
 
     @Override

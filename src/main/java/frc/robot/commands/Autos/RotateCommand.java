@@ -35,7 +35,7 @@ public class RotateCommand extends Command{
 
     @Override
     public void execute() {
-        double currentHeading = driveSubsystem.getYaw();
+         double currentHeading = driveSubsystem.getYaw();
         double angleError = targetAngle - (currentHeading - initialHeading); // Account for wrap-around 
         if (Math.abs(targetAngle - (currentHeading - initialHeading)) <= angleTolerance){
             isFinished = true;
