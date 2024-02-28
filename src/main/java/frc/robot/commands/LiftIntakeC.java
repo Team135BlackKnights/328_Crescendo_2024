@@ -34,7 +34,7 @@ public class LiftIntakeC extends Command {
     } 
 
 */
-if (RobotContainer.m_operatorController.getAButton()){
+if (RobotContainer.m_operatorController.getAButton()){//this sets the A button to making how fast the lift will move.
     multiplier = 4;
 }else{
     multiplier = 2;
@@ -44,7 +44,7 @@ if(RobotContainer.m_operatorController.getRightY() >= 0.05) {
 } else if (RobotContainer.m_operatorController.getRightY() <= -0.05) {
     liftIntakeS.spinLiftIntake(RobotContainer.m_operatorController.getRightY()/multiplier);
 } else {
-    liftIntakeS.spinLiftIntake(0);
+    liftIntakeS.spinLiftIntake(0); //callin the liftintakeS to tel it to stop moving, happens when u aren't bullying the controller.
 }
 SmartDashboard.putNumber("ARM HEIGHT", liftIntakeS.liftIntakeEncoder2.getPosition());
 // Assuming you want to stop when the position is within a range of 4.5 to 5.5
@@ -69,13 +69,13 @@ if (LiftIntakeS.liftIntakeEncoder.getPosition() < 0 || LiftIntakeS.liftIntakeEnc
 
 
     @Override
-    public void end(boolean interrupted) {
+    public void end(boolean interrupted) { //stopping all things(including booleans) which will ultimately stop the entire robot at the end of the match.
     
     }
 
     @Override
     public boolean isFinished() {
-        return false;
+        return false;//stops everything
     }
     
 }
