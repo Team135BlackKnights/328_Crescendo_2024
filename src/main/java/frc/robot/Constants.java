@@ -58,7 +58,7 @@ public final class Constants {
   public static class AutoConstants{
     public static final double kP = 0.02;
     public static final double WHEEL_CIRCUMFERENCE = 0.1524;
-    public static final double ENCODER_COUNTS_PER_REV = 2048.0;
+    public static final double ENCODER_COUNTS_PER_REV = 42;  //was 2048, changed 2/29
     public static final double TARGET_HEADING = 0.0;
     public static final double kPRotate = 0.25;
     public static final double kIRotate = 0.0;
@@ -66,8 +66,8 @@ public final class Constants {
     public static final double kPForward = .03;
     public static final double kIForward = .015;
     public static final double kDForward = 0;
-    public static final double kPStrafe = .25;
-    public static final double kIStrafe = 0;
+    public static final double kPStrafe = .2;
+    public static final double kIStrafe = .025;
     public static final double kDStrafe = 0;
 }   
 public static class TeleConstants{

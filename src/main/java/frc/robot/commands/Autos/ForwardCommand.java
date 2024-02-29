@@ -1,5 +1,7 @@
 package frc.robot.commands.Autos;
 
+import java.util.List;
+
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -29,7 +31,8 @@ public class ForwardCommand extends Command{
                 this.flip = 1;
             }
             m_goDown = goDown;
-            this.distance = Math.abs(distance);
+            isFinishedMovingLift = !goDown;
+            this.distance = Math.abs(distance)*2.4;
             pidController = new PIDController(Constants.AutoConstants.kPForward, Constants.AutoConstants.kIForward, Constants.AutoConstants.kDForward);
             addRequirements(subsystem);
     }
@@ -43,11 +46,12 @@ public class ForwardCommand extends Command{
     }
     @Override
   public void execute() {
-    double[] distanceTraveled = driveSubsystem.calculateDistance(false); 
-
-    if (Math.abs(distanceTraveled[0]) < distance) {
+    List<Double> distanceTraveled = driveSubsystem.calculateDistance(false); 
+    SmartDashboard.putBoolean("MovingDONE", isFinishedDriving);
+        SmartDashboard.putBoolean("MovingLIFTDONE", isFinishedMovingLift);
+    if (Math.abs(distanceTraveled.get(0)) < distance) {
       
-      driveSubsystem.drive.driveCartesian(flip*pidController.calculate(Math.abs(distanceTraveled[0]),distance), 0, 0); // Drive forward
+      driveSubsystem.drive.driveCartesian(flip*pidController.calculate(Math.abs(distanceTraveled.get(0)),distance), 0, 0); // Drive forward
     }else{
       isFinishedDriving = true;
     }
@@ -71,7 +75,7 @@ public class ForwardCommand extends Command{
         isFinished = true;
         timer.reset();
     }
-            SmartDashboard.putNumber("Forward Distance:", distanceTraveled[0]);
+            SmartDashboard.putNumber("Forward Distance:", distanceTraveled.get(0));
             SmartDashboard.putNumber("TIMER 1", timer.get());
   }
 

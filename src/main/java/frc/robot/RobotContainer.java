@@ -74,11 +74,12 @@ public final static XboxController m_operatorController =
   private void configureAutoChooser() {
         SmartDashboard.putNumber("PID", Constants.AutoConstants.kPForward);
         autoChooser.setDefaultOption("RED Alone Driver Station Auto (2 amp scores)", new SequentialCommandGroup(
-            new ForwardCommand(_driveSub, 8, liftIntakeS,false,true)
-          /*   new RotateCommand(_driveSub, 180),
+            new ForwardCommand(_driveSub, 1.5, liftIntakeS,false,false), //2.4 is 1 meter
+           // new RotateCommand(_driveSub, 90)
             new StrafeCommand(_driveSub, intakeS,-.4318,false), // 17 inches, may need to be flipped
             new ShootCommand(intakeS),
-            new ForwardCommand(_driveSub, -1, liftIntakeS,true,false),
+            new ForwardCommand(_driveSub, 1.5, liftIntakeS,false,true) //2.4 is 1 meter
+            /*new ForwardCommand(_driveSub, -1, liftIntakeS,true,false),
             new StrafeCommand(_driveSub, intakeS,.4318,true), // 17 inches, may need to be flipped
             new ForwardCommand(_driveSub, 1, liftIntakeS,false,false),
             new StrafeCommand(_driveSub, intakeS,-.4318,false), // 17 inches
@@ -87,18 +88,23 @@ public final static XboxController m_operatorController =
             new RotateCommand(_driveSub, 180)
             *///2 scores in amp, and ready to get next.
             ));
-        autoChooser.setDefaultOption("BLUE Alone Driver Station Auto (2 amp scores)", new SequentialCommandGroup(
-            new ForwardCommand(_driveSub, 1.5,liftIntakeS,false,true),
-            new StrafeCommand(_driveSub, intakeS,-.4318,false), // 17 inches
+        autoChooser.addOption("BLUE Alone Driver Station Auto (2 amp scores)", new SequentialCommandGroup(
+             new ForwardCommand(_driveSub, -1.5, liftIntakeS,false,false), //2.4 is 1 meter
+            new RotateCommand(_driveSub, 90),
+            new StrafeCommand(_driveSub, intakeS,-.4318,false), // 17 inches, may need to be flipped
             new ShootCommand(intakeS),
-            new ForwardCommand(_driveSub, 1,liftIntakeS,true,false),
+                         new ForwardCommand(_driveSub, 1.5, liftIntakeS,false,true) //2.4 is 1 meter
+           /* new ForwardCommand(_driveSub, 1,liftIntakeS,true,false),
             new StrafeCommand(_driveSub, intakeS,.4318,true), // 17 inches, may need to be flipped
             new ForwardCommand(_driveSub, -1,liftIntakeS,false,false),
             new StrafeCommand(_driveSub, intakeS,-.4318,false), // 17 inches
             new ShootCommand(intakeS),
-            new ForwardCommand(_driveSub,2,liftIntakeS,true,true)
+            new ForwardCommand(_driveSub,2,liftIntakeS,true,true)*/
             //2 scores in amp, and ready to get next.
             ));
+        autoChooser.addOption("SIMPLE drive out",new SequentialCommandGroup(
+             new ForwardCommand(_driveSub, 3, liftIntakeS,false,false) //2.4 is 1 meter
+        ));
         autoChooser.addOption("Empty Auto", new SequentialCommandGroup()); // No-op auto
     
         SmartDashboard.putData("Auto Selector", autoChooser);

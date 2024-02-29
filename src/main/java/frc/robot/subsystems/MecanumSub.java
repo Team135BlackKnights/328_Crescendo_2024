@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.math.Vector;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort.Port;
@@ -20,6 +21,9 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.math.kinematics.MecanumDriveWheelSpeeds;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -88,15 +92,18 @@ public void periodic() {
         frontRight.burnFlash();
         backLeft.burnFlash();
         backRight.burnFlash();
+        m_gyro.reset();
   }
-  
+  public Rotation2d getRotation(){
+            return m_gyro.getRotation2d();
+  }
   
   // sets wheel speeds
    public MecanumSub(ChassisSpeeds speeds) {
    // m_speeds = m_kinematics.toWheelSpeeds(speeds);
     //frontLeft.set(0.5);
     }
-    public double[] calculateDistance(boolean isStrafe) {
+    public List<Double> calculateDistance(boolean isStrafe) {
       if (isStrafe){
           double averageEncoderCountsFLBR = (frontLeftEncoder.getPosition()  + backRightEncoder.getPosition() ) / 2.0;
           double averageEncoderCountsFRBL = (frontRightEncoder.getPosition() + backLeftEncoder.getPosition() ) / 2.0;
@@ -105,13 +112,14 @@ public void periodic() {
           double rotationsFLBR = averageEncoderCountsFLBR / Constants.AutoConstants.ENCODER_COUNTS_PER_REV;
           double rotationsFRBL = averageEncoderCountsFRBL / Constants.AutoConstants.ENCODER_COUNTS_PER_REV;
           double rotationsOverall = averageEncoderCountsOverall / Constants.AutoConstants.ENCODER_COUNTS_PER_REV;
-          double[] distanceTraveled = new double[2];
-          distanceTraveled[0] = rotationsFLBR * Constants.AutoConstants.WHEEL_CIRCUMFERENCE;
-          distanceTraveled[1] = rotationsFRBL * Constants.AutoConstants.WHEEL_CIRCUMFERENCE;
-          distanceTraveled[2] = rotationsOverall * Constants.AutoConstants.WHEEL_CIRCUMFERENCE;
+          List<Double> distanceTraveled = new ArrayList<Double>();
+          distanceTraveled.add(rotationsFLBR * Constants.AutoConstants.WHEEL_CIRCUMFERENCE);
+          distanceTraveled.add(rotationsFRBL * Constants.AutoConstants.WHEEL_CIRCUMFERENCE);
+          distanceTraveled.add(rotationsOverall * Constants.AutoConstants.WHEEL_CIRCUMFERENCE);
           // Calculate distance traveled
           return distanceTraveled;
-      }else{
+      }
+      else{
       double averageEncoderCountsFLBR = (frontLeftEncoder.getPosition()  + backRightEncoder.getPosition() ) / 2.0;
           double averageEncoderCountsFRBL = (frontRightEncoder.getPosition()  + backLeftEncoder.getPosition() ) / 2.0;
           double averageEncoderCountsOverall = (Math.abs(averageEncoderCountsFLBR) + Math.abs(averageEncoderCountsFRBL)) / 2.0;
@@ -120,8 +128,8 @@ public void periodic() {
       double rotations = averageEncoderCountsOverall;
   
       // Calculate distance traveled
-      double[] distanceTraveled = new double[1];
-      distanceTraveled[0] = rotations * Constants.AutoConstants.WHEEL_CIRCUMFERENCE;
+          List<Double> distanceTraveled = new ArrayList<Double>();
+          distanceTraveled.add(rotations * Constants.AutoConstants.WHEEL_CIRCUMFERENCE);
       return distanceTraveled;}
       }
       public double getYaw() {

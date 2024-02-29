@@ -1,5 +1,7 @@
 package frc.robot.commands.Autos;
 
+import java.util.List;
+
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -29,7 +31,7 @@ Timer timer = new Timer();
             this.flip = 1;
         }
         shouldIntake = intakeWhileMoving;
-        this.targetDistance = Math.abs(targetDistance);
+        this.targetDistance = Math.abs(targetDistance)*2.4;
         pidController = new PIDController(Constants.AutoConstants.kPStrafe, Constants.AutoConstants.kIStrafe, Constants.AutoConstants.kDStrafe);
         this.headingCorrectionGain = 0.03; // Adjust for gyro correction
 
@@ -47,15 +49,15 @@ Timer timer = new Timer();
 
     @Override
     public void execute() {
-         double[] distanceTraveled = driveSubsystem.calculateDistance(true); // Make sure this factors in sideways movement
+         List<Double> distanceTraveled = driveSubsystem.calculateDistance(true); // Make sure this factors in sideways movement
    double currentHeading = driveSubsystem.getYaw();
         double headingError = initialHeading - currentHeading;
         double turnAdjustment = headingError * headingCorrectionGain;
-        if (distanceTraveled[2] < targetDistance) {
+        if (distanceTraveled.get(2) < targetDistance) {
             if (shouldIntake){
                 intake.spinIntake(.75);
               }
-            driveSubsystem.drive.driveCartesian(0, flip*pidController.calculate(Math.abs(distanceTraveled[2]),targetDistance), turnAdjustment); 
+            driveSubsystem.drive.driveCartesian(0.07, flip*pidController.calculate(Math.abs(distanceTraveled.get(2)),targetDistance), .035); 
         } else{
             isFinished = true;
         }
@@ -63,7 +65,7 @@ Timer timer = new Timer();
             isFinished = true;
             timer.reset();
         }
-        SmartDashboard.putNumber("Strafe Distance:", distanceTraveled[2]);
+        SmartDashboard.putNumber("Strafe Distance:", distanceTraveled.get(2));
         
     }
 

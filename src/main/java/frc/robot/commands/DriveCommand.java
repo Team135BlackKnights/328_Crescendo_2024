@@ -43,19 +43,19 @@ public class DriveCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double xSpeed = RobotContainer.m_driverController.getLeftY();
+    double xSpeed = -RobotContainer.m_driverController.getLeftY();
    double ySpeed = RobotContainer.m_driverController.getLeftX();
    double turningSpeed = RobotContainer.m_driverController.getRightX();
-    m_subsystem.drive.driveCartesian(xSpeed, ySpeed, turningSpeed);
 
-    /*xSpeed = Math.pow(xSpeed, 2) * (xSpeed < 0 ? -1 : 1);
+    xSpeed = Math.pow(xSpeed, 2) * (xSpeed < 0 ? -1 : 1);
    ySpeed = Math.pow(ySpeed, 2) * (ySpeed < 0 ? -1 : 1);
    turningSpeed = Math.pow(turningSpeed, 2) * (turningSpeed < 0 ? -1 : 1);
 
    xSpeed = Math.abs(xSpeed) > Constants.DEADBAND ? xSpeed : 0.0;
    ySpeed = Math.abs(ySpeed) > Constants.DEADBAND ? ySpeed : 0.0;
    turningSpeed = Math.abs(turningSpeed) > Constants.DEADBAND ? turningSpeed : 0.0;
-*/
+    m_subsystem.drive.driveCartesian(xSpeed, ySpeed, turningSpeed);//,m_subsystem.getRotation());
+
     //new ChassisSpeeds(RobotContainer.m_driverController.getLeftX()*Constants.MAX_SPEED_HORIZONTAL_METERS_PER_SECOND, RobotContainer.m_driverController.getLeftY()*Constants.MAX_SPEED_METERS_PER_SECOND, RobotContainer.m_driverController.getRightX()*Constants.MAX_SPEED_ROTATION_METERS_PER_SECOND);
   }
 
