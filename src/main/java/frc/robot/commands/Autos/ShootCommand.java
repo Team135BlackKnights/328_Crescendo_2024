@@ -21,13 +21,11 @@ public class ShootCommand extends Command{
     }
     @Override
     public void execute(){
-        intake.spinOuttake(1);
-        if (timer.get() < .5){
-            intake.spinIntake(0);
-        }else{
-            intake.spinIntake(-1);
-        }
+        intake.spinOuttake(-1);
+        intake.spinIntake(1);
         if (timer.get() > .75){
+            intake.spinIntake(0);
+            intake.spinOuttake(0);
             isFinished = true;
         }
     }
@@ -35,6 +33,7 @@ public class ShootCommand extends Command{
     public void end(boolean interrupted){
         intake.spinIntake(0);
         intake.spinOuttake(0);
+        timer.reset();
     }
     @Override
     public boolean isFinished(){

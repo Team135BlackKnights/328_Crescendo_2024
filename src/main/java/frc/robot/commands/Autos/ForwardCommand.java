@@ -20,7 +20,6 @@ public class ForwardCommand extends Command{
     boolean isFinished = false;
     boolean isFinishedDriving = false;
     boolean isFinishedMovingLift = false;
-    Timer timer = new Timer();
 
     public ForwardCommand(MecanumSub subsystem, double distance, LiftIntakeS liftS,boolean goDown,boolean ignoreManip) {
             this.driveSubsystem = subsystem;
@@ -31,7 +30,7 @@ public class ForwardCommand extends Command{
                 this.flip = 1;
             }
             m_goDown = goDown;
-            isFinishedMovingLift = !goDown;
+            isFinishedMovingLift = ignoreManip;
             this.distance = Math.abs(distance)*2.4;
             pidController = new PIDController(Constants.AutoConstants.kPForward, Constants.AutoConstants.kIForward, Constants.AutoConstants.kDForward);
             addRequirements(subsystem);
@@ -55,34 +54,34 @@ public class ForwardCommand extends Command{
     }else{
       isFinishedDriving = true;
     }
-    if(m_goDown){
-      if(Math.abs(lift.getLiftIntakeEncoderAverage()) < .1){ //will need to be changed, but I aint risking the motors eating themselves.
-          lift.spinLiftIntake(0.15);
+    if(!m_goDown){
+      if(!isFinishedMovingLift){
+if(lift.getLiftIntakeEncoderAverage() > -.001){ //will need to be changed, but I aint risking the motors eating themselves.
+  lift.spinLiftIntake(-0.25);
       } else {
+          lift.spinLiftIntake(0);
           isFinishedMovingLift = true;
       }
+      }  
     } else {
-      if(Math.abs(lift.getLiftIntakeEncoderAverage()) < .1){ //will need to be changed, but I aint risking the motors eating themselves.
-          lift.spinLiftIntake(-0.15);
+      if (!isFinishedMovingLift){
+if(Math.abs(lift.getLiftIntakeEncoderAverage()) < .0059){ //will need to be changed, but I aint risking the motors eating themselves.
+          lift.spinLiftIntake(0.25);
       }else{
+          lift.spinLiftIntake(0);
           isFinishedMovingLift = true;
+      }
       }
     }
     if(isFinishedDriving && isFinishedMovingLift){
       isFinished = true;
     }
-    if (timer.get() >= 2.0) {
-        isFinished = true;
-        timer.reset();
-    }
             SmartDashboard.putNumber("Forward Distance:", distanceTraveled.get(0));
-            SmartDashboard.putNumber("TIMER 1", timer.get());
   }
 
   @Override
   public void end(boolean interrupted) {
     driveSubsystem.drive.driveCartesian(0, 0, 0); // Stop the robot
-    timer.stop();
   }
 
   @Override

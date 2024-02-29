@@ -36,17 +36,14 @@ public class RotateCommand extends Command{
     @Override
     public void execute() {
          double currentHeading = driveSubsystem.getYaw();
-        double angleError = targetAngle - (currentHeading - initialHeading); // Account for wrap-around 
-        if (Math.abs(targetAngle - (currentHeading - initialHeading)) <= angleTolerance){
-            isFinished = true;
-        }
-        if (timer.get() >= .25) {
-            isFinished = true;
+       //  double error = 
+       double angleError = targetAngle - (currentHeading - initialHeading); // Account for wrap-around 
+        if (Math.abs(angleError) <= angleTolerance){
+            end(false);
         }
 
         driveSubsystem.drive.driveCartesian(0, 0, pidController.calculate(currentHeading,targetAngle)); 
 
-        SmartDashboard.putNumber("TIMER3", timer.get());
 
     }
 

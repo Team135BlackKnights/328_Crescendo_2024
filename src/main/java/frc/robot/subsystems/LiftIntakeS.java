@@ -27,6 +27,8 @@ public class LiftIntakeS extends SubsystemBase { //create a subsystem
       liftIntakeMotor2.setIdleMode(IdleMode.kBrake);
       liftIntakeEncoder.setPositionConversionFactor(1/Constants.TeleConstants.liftConversionFactor);
       liftIntakeEncoder2.setPositionConversionFactor(1/Constants.TeleConstants.liftConversionFactor);
+      liftIntakeMotor.burnFlash();
+      liftIntakeMotor2.burnFlash();
     
     }
 

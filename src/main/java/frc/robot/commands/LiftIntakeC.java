@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.LiftIntakeS;
@@ -39,14 +40,19 @@ if (RobotContainer.m_operatorController.getAButton()){//this sets the A button t
 }else{
     multiplier = 2;
 }
+if (RobotContainer.m_operatorController.getBButton()){
+    liftIntakeS.resetEncoders();
+}
 if(RobotContainer.m_operatorController.getRightY() >= 0.05) {
     liftIntakeS.spinLiftIntake(RobotContainer.m_operatorController.getRightY()/multiplier);
 } else if (RobotContainer.m_operatorController.getRightY() <= -0.05) {
     liftIntakeS.spinLiftIntake(RobotContainer.m_operatorController.getRightY()/multiplier);
 } else {
+    if (DriverStation.isTeleop()){
     liftIntakeS.spinLiftIntake(0); //callin the liftintakeS to tel it to stop moving, happens when u aren't bullying the controller.
+    }
 }
-SmartDashboard.putNumber("ARM HEIGHT", liftIntakeS.liftIntakeEncoder2.getPosition());
+SmartDashboard.putNumber("ARM HEIGHT", liftIntakeS.getLiftIntakeEncoderAverage());
 // Assuming you want to stop when the position is within a range of 4.5 to 5.5
 /*if (LiftIntakeS.liftIntakeEncoder2.getPosition() < 0 || LiftIntakeS.liftIntakeEncoder2.getPosition() > 5) {
     liftIntakeS.stopLiftIntake();

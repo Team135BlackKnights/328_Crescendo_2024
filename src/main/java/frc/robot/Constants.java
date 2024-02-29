@@ -60,7 +60,7 @@ public final class Constants {
     public static final double WHEEL_CIRCUMFERENCE = 0.1524;
     public static final double ENCODER_COUNTS_PER_REV = 42;  //was 2048, changed 2/29
     public static final double TARGET_HEADING = 0.0;
-    public static final double kPRotate = 0.25;
+    public static final double kPRotate = 0.05;
     public static final double kIRotate = 0.0;
     public static final double kDRotate = 0.0;
     public static final double kPForward = .03;
