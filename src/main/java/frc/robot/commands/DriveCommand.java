@@ -6,15 +6,13 @@ package frc.robot.commands;
 
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.MecanumSub;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 
 /** An example command that uses an example subsystem.*/
 public class DriveCommand extends Command {
-
+  private final SlewRateLimiter xLimiter, yLimiter, turningLimiter;
 
 
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
@@ -24,7 +22,9 @@ public class DriveCommand extends Command {
 
   public DriveCommand(MecanumSub subsystem) {
     m_subsystem = subsystem;
-
+    this.xLimiter = new SlewRateLimiter(8);
+    this.yLimiter = new SlewRateLimiter(8);
+    this.turningLimiter = new SlewRateLimiter(8);
     // Use addRequirements() here to declare subsystem dependencies
     addRequirements(subsystem);
   }
@@ -43,6 +43,7 @@ public class DriveCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    m_subsystem.pCompress.enableDigital();
     double xSpeed = -RobotContainer.m_driverController.getLeftY();
    double ySpeed = RobotContainer.m_driverController.getLeftX();
    double turningSpeed = RobotContainer.m_driverController.getRightX();
@@ -54,7 +55,10 @@ public class DriveCommand extends Command {
    xSpeed = Math.abs(xSpeed) > Constants.DEADBAND ? xSpeed : 0.0;
    ySpeed = Math.abs(ySpeed) > Constants.DEADBAND ? ySpeed : 0.0;
    turningSpeed = Math.abs(turningSpeed) > Constants.DEADBAND ? turningSpeed : 0.0;
-    m_subsystem.drive.driveCartesian(xSpeed, ySpeed, turningSpeed);//,m_subsystem.getRotation());
+   xSpeed = xLimiter.calculate(xSpeed);
+   ySpeed = yLimiter.calculate(ySpeed);
+   turningSpeed = turningLimiter.calculate(turningSpeed);
+   m_subsystem.drive.driveCartesian(xSpeed, ySpeed, turningSpeed);//,m_subsystem.getRotation());
 
     //new ChassisSpeeds(RobotContainer.m_driverController.getLeftX()*Constants.MAX_SPEED_HORIZONTAL_METERS_PER_SECOND, RobotContainer.m_driverController.getLeftY()*Constants.MAX_SPEED_METERS_PER_SECOND, RobotContainer.m_driverController.getRightX()*Constants.MAX_SPEED_ROTATION_METERS_PER_SECOND);
   }

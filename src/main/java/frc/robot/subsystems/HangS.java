@@ -9,10 +9,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase; //duh
 import frc.robot.Constants;
 
 public class HangS extends SubsystemBase { //create a subsystem
-public static DoubleSolenoid hang = new DoubleSolenoid(2, PneumaticsModuleType.REVPH, Constants.Hang_ID, Constants.Hang_ID2);
+public static DoubleSolenoid hang = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.Hang_ID, Constants.Hang_ID2);
 
     public HangS(){
-
+      
     }
 
     public void pneumaticOut() {

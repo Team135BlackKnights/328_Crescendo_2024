@@ -4,7 +4,6 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.MecanumControllerCommand;
 import frc.robot.Constants;
 import frc.robot.subsystems.MecanumSub;
 
@@ -20,7 +19,7 @@ public class RotateCommand extends Command{
     public RotateCommand(MecanumSub driveSubsystem, double targetAngle) {
         this.driveSubsystem = driveSubsystem;
         this.targetAngle = targetAngle;
-        this.angleTolerance = 1.0; // Adjust tolerance if necessary
+        this.angleTolerance = 5; // Adjust tolerance if necessary
         pidController = new PIDController(Constants.AutoConstants.kPRotate, Constants.AutoConstants.kIRotate, Constants.AutoConstants.kDRotate); // Adjust constants as needed
         addRequirements(driveSubsystem);
     }
@@ -37,11 +36,16 @@ public class RotateCommand extends Command{
     public void execute() {
          double currentHeading = driveSubsystem.getYaw();
        //  double error = 
-       double angleError = targetAngle - (currentHeading - initialHeading); // Account for wrap-around 
-        if (Math.abs(angleError) <= angleTolerance){
-            end(false);
+       double angleError = targetAngle - currentHeading;
+       angleError = (angleError + 180.0) % 360.0 - 180.0;
+        SmartDashboard.putNumber("angleerroR", Math.abs(angleError));
+// Check if the absolute angle error is within tolerance
+        if (Math.abs(angleError) <= angleTolerance) {
+            isFinished = true;
+        }     
+        if (timer.get() > 1){
+            isFinished = true;
         }
-
         driveSubsystem.drive.driveCartesian(0, 0, pidController.calculate(currentHeading,targetAngle)); 
 
 

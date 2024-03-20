@@ -44,8 +44,8 @@ public final class Constants {
   public static int intakeMotorID = 20;
   public static int intakeMotorID2 = 21;
 
-    public static final int Hang_ID = 40;
-  public static final int Hang_ID2 = 41;
+    public static final int Hang_ID = 0;
+  public static final int Hang_ID2 = 1;
 //placeholder values for autos
   public static int kAutoDriveSpeed = 3;
   public static int kAutoDriveDistanceInches = 3;
@@ -57,20 +57,24 @@ public final class Constants {
   // encoders 
   public static class AutoConstants{
     public static final double kP = 0.02;
-    public static final double WHEEL_CIRCUMFERENCE = 0.1524;
+    public static final double WHEEL_CIRCUMFERENCE = .1524;
     public static final double ENCODER_COUNTS_PER_REV = 42;  //was 2048, changed 2/29
     public static final double TARGET_HEADING = 0.0;
-    public static final double kPRotate = 0.05;
-    public static final double kIRotate = 0.0;
+    public static final double kPRotate = 0.0075;
+    public static final double kIRotate = 0;
     public static final double kDRotate = 0.0;
-    public static final double kPForward = .03;
-    public static final double kIForward = .015;
+    public static final double kPForward = .10;
+    public static final double kIForward = .025;
     public static final double kDForward = 0;
-    public static final double kPStrafe = .2;
+    public static final double kPStrafe = .45;
     public static final double kIStrafe = .025;
     public static final double kDStrafe = 0;
+    public static final double kPStrafeRotate = .001;
+    public static final double kIStrafeRotate = .0005;
+    public static final double kDStrafeRotate = 0;
 }   
 public static class TeleConstants{
     public static final double liftConversionFactor = 14112;
+    public static String limelightName = "lime";
 }
 }

@@ -23,6 +23,8 @@ public class IntakeS extends SubsystemBase { //create a subsystem
       intakeMotor.setIdleMode(IdleMode.kBrake);
       intakeMotor2.enableVoltageCompensation(12);
       intakeMotor2.setIdleMode(IdleMode.kCoast);
+      intakeMotor.burnFlash();
+      intakeMotor2.burnFlash();
     }
 
     public void spinIntake(double speed) {

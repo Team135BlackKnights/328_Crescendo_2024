@@ -1,6 +1,5 @@
 package frc.robot.commands;
 
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -11,7 +10,7 @@ import frc.robot.subsystems.LiftIntakeS;
 
 public class LiftIntakeC extends Command {
     private final LiftIntakeS liftIntakeS;
-    int multiplier;
+    float multiplier;
     public LiftIntakeC(LiftIntakeS subsystem) {
         liftIntakeS = subsystem;
         addRequirements(subsystem);
@@ -35,10 +34,10 @@ public class LiftIntakeC extends Command {
     } 
 
 */
-if (RobotContainer.m_operatorController.getAButton()){//this sets the A button to making how fast the lift will move.
-    multiplier = 4;
+if (RobotContainer.m_operatorController.getLeftBumper()){//this sets the A button to making how fast the lift will move.
+    multiplier = 2f;
 }else{
-    multiplier = 2;
+    multiplier = 1.5f;
 }
 if (RobotContainer.m_operatorController.getBButton()){
     liftIntakeS.resetEncoders();

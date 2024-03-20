@@ -7,33 +7,21 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import edu.wpi.first.math.Vector;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.wpilibj.Encoder;
+import frc.robot.LimelightHelpers;
+import frc.robot.Constants.TeleConstants;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
-import edu.wpi.first.math.kinematics.MecanumDriveOdometry;
-import edu.wpi.first.math.kinematics.MecanumDriveWheelPositions;
-import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import edu.wpi.first.math.kinematics.MecanumDriveWheelSpeeds;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix6.hardware.TalonFX;
-import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkBase.IdleMode;
-
 
 
   //its the motors gang
@@ -46,8 +34,9 @@ import com.revrobotics.CANSparkBase.IdleMode;
   public RelativeEncoder frontRightEncoder = frontRight.getEncoder();
   public RelativeEncoder backLeftEncoder = backLeft.getEncoder();
   public RelativeEncoder backRightEncoder = backRight.getEncoder();
-
+  public static Compressor pCompress = new Compressor(PneumaticsModuleType.CTREPCM);  //Digtial I/O,Relay
   public MecanumDrive drive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
+  double distance = 0;
   
   //Translation2d m_frontLeftLocation = new Translation2d(Units.inchesToMeters(19.1), Units.inchesToMeters(19.1)); // check to see if 19.1 is the correct length in inches, but we're pretty sure it is from doing math stuff
   //Translation2d m_frontRightLocation = new Translation2d(Units.inchesToMeters(19.1), -Units.inchesToMeters(19.1));
@@ -68,8 +57,9 @@ private final AHRS m_gyro = new AHRS(Port.kUSB1);
 
 public void periodic() {
   // Get my wheel positions
- 
+  distance = LimelightHelpers.getTX(TeleConstants.limelightName);
 }
+
 
     public void runStop() {
     //Sets motors to stop when not in use
@@ -79,11 +69,15 @@ public void periodic() {
     }
 
   public MecanumSub() {
+        pCompress.enableDigital();
         frontLeft.setIdleMode(IdleMode.kBrake);
         frontRight.setIdleMode(IdleMode.kBrake);
         backLeft.setIdleMode(IdleMode.kBrake);
         backRight.setIdleMode(IdleMode.kBrake);
         frontLeft.enableVoltageCompensation(12);
+        frontRight.enableVoltageCompensation(12);
+        backLeft.enableVoltageCompensation(12);
+        backRight.enableVoltageCompensation(12);
         frontLeft.setSmartCurrentLimit(50);
         frontRight.setSmartCurrentLimit(50);
         backLeft.setSmartCurrentLimit(50);
@@ -97,40 +91,30 @@ public void periodic() {
   public Rotation2d getRotation(){
             return m_gyro.getRotation2d();
   }
-  
+  public void resetRotation(){
+    m_gyro.reset();
+  }
   // sets wheel speeds
    public MecanumSub(ChassisSpeeds speeds) {
    // m_speeds = m_kinematics.toWheelSpeeds(speeds);
     //frontLeft.set(0.5);
     }
-    public List<Double> calculateDistance(boolean isStrafe) {
-      if (isStrafe){
+
+    public List<Double> calculateDistance() {
           double averageEncoderCountsFLBR = (frontLeftEncoder.getPosition()  + backRightEncoder.getPosition() ) / 2.0;
           double averageEncoderCountsFRBL = (frontRightEncoder.getPosition() + backLeftEncoder.getPosition() ) / 2.0;
-          double averageEncoderCountsOverall = (Math.abs(averageEncoderCountsFLBR) + Math.abs(averageEncoderCountsFRBL)) / 2.0;
+          double averageEncoderCountsOverall = (frontLeftEncoder.getPosition() + backRightEncoder.getPosition() + backLeftEncoder.getPosition() + frontRightEncoder.getPosition()) / 4.0;
           // Convert encoder counts to wheel rotations
           double rotationsFLBR = averageEncoderCountsFLBR / Constants.AutoConstants.ENCODER_COUNTS_PER_REV;
           double rotationsFRBL = averageEncoderCountsFRBL / Constants.AutoConstants.ENCODER_COUNTS_PER_REV;
-          double rotationsOverall = averageEncoderCountsOverall / Constants.AutoConstants.ENCODER_COUNTS_PER_REV;
+          double rotationsOverall = averageEncoderCountsOverall; /// Constants.AutoConstants.ENCODER_COUNTS_PER_REV; /// Constants.AutoConstants.ENCODER_COUNTS_PER_REV;
           List<Double> distanceTraveled = new ArrayList<Double>();
           distanceTraveled.add(rotationsFLBR * Constants.AutoConstants.WHEEL_CIRCUMFERENCE);
           distanceTraveled.add(rotationsFRBL * Constants.AutoConstants.WHEEL_CIRCUMFERENCE);
           distanceTraveled.add(rotationsOverall * Constants.AutoConstants.WHEEL_CIRCUMFERENCE);
           // Calculate distance traveled
           return distanceTraveled;
-      }
-      else{
-      double averageEncoderCountsFLBR = (frontLeftEncoder.getPosition()  + backRightEncoder.getPosition() ) / 2.0;
-          double averageEncoderCountsFRBL = (frontRightEncoder.getPosition()  + backLeftEncoder.getPosition() ) / 2.0;
-          double averageEncoderCountsOverall = (Math.abs(averageEncoderCountsFLBR) + Math.abs(averageEncoderCountsFRBL)) / 2.0;
-  
-      // Convert encoder counts to wheel rotations
-      double rotations = averageEncoderCountsOverall;
-  
-      // Calculate distance traveled
-          List<Double> distanceTraveled = new ArrayList<Double>();
-          distanceTraveled.add(rotations * Constants.AutoConstants.WHEEL_CIRCUMFERENCE);
-      return distanceTraveled;}
+      
       }
       public double getYaw() {
         return m_gyro.getYaw();
@@ -144,7 +128,7 @@ public void periodic() {
   public void MecanumDrive(double frontLeft,double backLeft,double frontRight,double backRight) {
       MecanumDrive(frontLeft, backLeft, frontRight, backRight);
   }
-
+  
 
 
   }
