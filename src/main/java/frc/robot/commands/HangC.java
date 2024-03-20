@@ -23,9 +23,15 @@ public class HangC extends Command {
     public void execute() {
 
         if (RobotContainer.m_operatorController.getYButtonPressed()) {
-           hangS.pneumaticOut();
-        }   else if (RobotContainer.m_operatorController.getXButtonPressed()) {
-           hangS.pneumaticIn();
+           hangS.spinHang(.4);
+        }   else{
+            hangS.spinHang(0);
+        }
+        if (RobotContainer.m_operatorController.getXButtonPressed()) {
+           hangS.spinTension(.25);
+        }
+        else{
+            hangS.spinTension(0);
         }
     }
 

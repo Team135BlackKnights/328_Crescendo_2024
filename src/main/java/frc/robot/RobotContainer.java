@@ -59,7 +59,6 @@ public final static XboxController m_operatorController =
     liftIntakeS.setDefaultCommand(liftC);
     _driveSub.setDefaultCommand(_DriveCommand);
     hangS.setDefaultCommand(hangC);
-    hangS.pneumaticOut();
     // Configure the trigger bindings
     configureBindings();
   
