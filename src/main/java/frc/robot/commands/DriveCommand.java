@@ -7,6 +7,7 @@ package frc.robot.commands;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.MecanumSub;
 import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 
@@ -43,7 +44,7 @@ public class DriveCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.pCompress.enableDigital();
+    //m_subsystem.pCompress.enableDigital();
     double xSpeed = -RobotContainer.m_driverController.getLeftY();
    double ySpeed = RobotContainer.m_driverController.getLeftX();
    double turningSpeed = RobotContainer.m_driverController.getRightX();
@@ -59,7 +60,7 @@ public class DriveCommand extends Command {
    ySpeed = yLimiter.calculate(ySpeed);
    turningSpeed = turningLimiter.calculate(turningSpeed);
    m_subsystem.drive.driveCartesian(xSpeed, ySpeed, turningSpeed);//,m_subsystem.getRotation());
-
+    SmartDashboard.putNumber("HEADING", m_subsystem.getYaw());
     //new ChassisSpeeds(RobotContainer.m_driverController.getLeftX()*Constants.MAX_SPEED_HORIZONTAL_METERS_PER_SECOND, RobotContainer.m_driverController.getLeftY()*Constants.MAX_SPEED_METERS_PER_SECOND, RobotContainer.m_driverController.getRightX()*Constants.MAX_SPEED_ROTATION_METERS_PER_SECOND);
   }
 

@@ -38,8 +38,8 @@ public class RobotContainer {
     LiftIntakeS liftIntakeS = new LiftIntakeS();
     LiftIntakeC liftC = new LiftIntakeC(liftIntakeS);
     IntakeC intakeC = new IntakeC(intakeS);
-    HangS hangS = new HangS();
-    HangC hangC = new HangC(hangS);
+  //  HangS hangS = new HangS();
+    //HangC hangC = new HangC(hangS);
 // The robot's subsystems and commands are defined here...
 private final SendableChooser<SequentialCommandGroup> autoChooser = new SendableChooser<>();
 
@@ -58,8 +58,8 @@ public final static XboxController m_operatorController =
     intakeS.setDefaultCommand(intakeC);
     liftIntakeS.setDefaultCommand(liftC);
     _driveSub.setDefaultCommand(_DriveCommand);
-    hangS.setDefaultCommand(hangC);
-    hangS.pneumaticOut();
+    ///hangS.setDefaultCommand(hangC);
+   // hangS.pneumaticOut();
     // Configure the trigger bindings
     configureBindings();
   
@@ -116,7 +116,7 @@ public final static XboxController m_operatorController =
             //2 scores in amp, and ready to get next.
             ));
           autoChooser.addOption("2 point Red", new SequentialCommandGroup(
-        new ForwardCommand(_driveSub, 1.625, liftIntakeS,false,true,true), //was -1.625
+        new ForwardCommand(_driveSub, 1.55, liftIntakeS,false,true,true), //was -1.625
         new StrafeCommand(_driveSub, intakeS,.3,false,0), // 17 inches, may need to be flipped   
         new Manipulator(liftIntakeS, 0),   
         new ShootCommand(intakeS,true),
@@ -128,9 +128,9 @@ public final static XboxController m_operatorController =
           new RotateCommand(_driveSub, 62)
             )
           ),
-          new StrafeCommand(_driveSub, intakeS, -.25, true,0),
+          new StrafeCommand(_driveSub, intakeS, -.35, true,0),
           new RotateCommand(_driveSub, 69),
-          new StrafeCommand(_driveSub, intakeS, .25, false,0),
+          new StrafeCommand(_driveSub, intakeS, .35, false,0),
           new ParallelCommandGroup(
             new SequentialCommandGroup(
               new RotateCommand(_driveSub, 0),
@@ -143,7 +143,7 @@ public final static XboxController m_operatorController =
             ));
 
           autoChooser.addOption("2 point Blue", new SequentialCommandGroup(
-        new ForwardCommand(_driveSub, -1.625, liftIntakeS,false,true,true), //was -1.625
+        new ForwardCommand(_driveSub, -1.55, liftIntakeS,false,true,true), //was -1.625
         new StrafeCommand(_driveSub, intakeS,.4,false,0), // 17 inches, may need to be flipped   
         new Manipulator(liftIntakeS, 0),   
         new ShootCommand(intakeS,true),

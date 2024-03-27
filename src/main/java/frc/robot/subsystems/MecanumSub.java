@@ -34,7 +34,7 @@ import com.revrobotics.CANSparkBase.IdleMode;
   public RelativeEncoder frontRightEncoder = frontRight.getEncoder();
   public RelativeEncoder backLeftEncoder = backLeft.getEncoder();
   public RelativeEncoder backRightEncoder = backRight.getEncoder();
-  public static Compressor pCompress = new Compressor(PneumaticsModuleType.CTREPCM);  //Digtial I/O,Relay
+  //public static Compressor pCompress = new Compressor(PneumaticsModuleType.CTREPCM);  //Digtial I/O,Relay
   public MecanumDrive drive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
   double distance = 0;
   
@@ -69,7 +69,7 @@ public void periodic() {
     }
 
   public MecanumSub() {
-        pCompress.enableDigital();
+      //  pCompress.enableDigital();
         frontLeft.setIdleMode(IdleMode.kBrake);
         frontRight.setIdleMode(IdleMode.kBrake);
         backLeft.setIdleMode(IdleMode.kBrake);
