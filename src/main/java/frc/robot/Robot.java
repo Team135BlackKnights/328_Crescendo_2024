@@ -45,7 +45,7 @@ public void robotInit() {
         camera.setFPS(24);
       });
       m_visionThread.setDaemon(true);
-      m_visionThread.start();
+      //m_visionThread.start();
   m_robotContainer = new RobotContainer();
     }
   
@@ -135,6 +135,7 @@ m_visionThread.start();
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+    RobotContainer._driveSub.resetRotation();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
